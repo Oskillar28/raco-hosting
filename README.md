@@ -24,7 +24,7 @@ Proyecto de **Óscar**, alumno de **2º de SMX** (Sistemas Microinformáticos y 
 
 | Servicio | Para qué sirve | Precio |
 |---|---|---:|
-| 🎬 **Jellyfin** | Tu propio servidor multimedia privado ("Netflix con tu contenido") | **3 €/mes** |
+| 🎬 **Jellyfin** | Tu propio servidor multimedia privado ("Netflix con tu contenido") | **5 €/mes** |
 | ⛏️ **Minecraft** | Servidor dedicado 24/7 para tu grupo | **10 €/mes** |
 | 💾 **Almacenamiento 1 TB** | Espacio privado para copias, fotos y documentos | **5 – 7 €/mes** |
 
