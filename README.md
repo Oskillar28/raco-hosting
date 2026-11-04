@@ -126,7 +126,7 @@ flowchart TB
 
 ## 🌐 Web del servicio
 
-La carpeta [`web/`](web/) contiene la página comercial (`index.html`), un único archivo sin dependencias que se puede publicar en el NAS o en GitHub Pages.
+La carpeta [`docs/`](docs/) contiene la página comercial (`index.html`), un único archivo sin dependencias publicado con GitHub Pages en **https://oskillar28.github.io/raco-hosting/** y que también se puede alojar en el NAS.
 
 ## 📬 Contacto
 
