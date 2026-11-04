@@ -12,7 +12,7 @@ Proyecto de **Óscar**, alumno de **2º de SMX** (Sistemas Microinformáticos y 
 ![Jellyfin](https://img.shields.io/badge/Jellyfin-streaming-00A4DC?style=for-the-badge&logo=jellyfin&logoColor=white)
 ![Minecraft](https://img.shields.io/badge/Minecraft-servidor-62B47A?style=for-the-badge)
 
-[🌐 Web del servicio](#-web-del-servicio) · [💶 Tarifas](#-servicios-y-tarifas) · [🏗️ Infraestructura](#️-infraestructura) · [📬 Contacto](#-contacto)
+[🌐 Web del servicio](https://oskillar28.github.io/raco-hosting/) · [💶 Tarifas](#-servicios-y-tarifas) · [🏗️ Infraestructura](#️-infraestructura) · [📬 Contacto](#-contacto)
 
 </div>
 
@@ -126,11 +126,15 @@ flowchart TB
 
 ## 🌐 Web del servicio
 
-La carpeta [`docs/`](docs/) contiene la página comercial (`index.html`), un único archivo sin dependencias publicado con GitHub Pages en **https://oskillar28.github.io/raco-hosting/** y que también se puede alojar en el NAS.
+### 👉 [Visitar la web de Racó Hosting](https://oskillar28.github.io/raco-hosting/)
+
+[![Web de Racó Hosting](docs/captura-web.jpg)](https://oskillar28.github.io/raco-hosting/)
+
+**https://oskillar28.github.io/raco-hosting/**
 
 ## 📬 Contacto
 
-¿Te interesa algún servicio? Usa el **formulario de contacto de la web** indicando qué servicio quieres y cuántos usuarios o jugadores seréis. Respondo por correo en menos de 24 horas.
+¿Te interesa algún servicio? Usa el **[formulario de contacto de la web](https://oskillar28.github.io/raco-hosting/#contacto)** indicando qué servicio quieres y cuántos usuarios o jugadores seréis. Respondo por correo en menos de 24 horas.
 
 ---
 
