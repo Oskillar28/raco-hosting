@@ -1,0 +1,66 @@
+name: Publicar imagen Docker
+
+# Construye la web en una imagen nginx y la publica en GitHub Packages (ghcr.io)
+# cada vez que cambia la web, el Dockerfile o la configuración de nginx.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - "Dockerfile"
+      - "nginx.conf"
+      - ".github/workflows/docker.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: docker-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  IMAGE: ghcr.io/oskillar28/raco-hosting
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Iniciar sesión en GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Etiquetas de la imagen
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE }}
+          tags: |
+            type=raw,value=latest
+            type=sha,format=short
+            type=ref,event=tag
+
+      - name: Construir y publicar
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          platforms: linux/amd64
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Resumen
+        run: |
+          {
+            echo "### 🐳 Imagen publicada"
+            echo ""
+            echo '```'
+            echo "docker run -d -p 8080:80 --name raco-web ${IMAGE}:latest"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

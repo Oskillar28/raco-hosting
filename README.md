@@ -9,6 +9,7 @@ Proyecto de **Óscar**, alumno de **2º de SMX** (Sistemas Microinformáticos y 
 ![Estado](https://img.shields.io/badge/estado-en%20servicio-2e9e5b?style=for-the-badge)
 ![NAS](https://img.shields.io/badge/servidores-2%20NAS%20ASUSTOR-0f6b5c?style=for-the-badge)
 ![Docker](https://img.shields.io/badge/Docker-contenedores-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Imagen Docker](https://img.shields.io/badge/ghcr.io-imagen%20web-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Jellyfin](https://img.shields.io/badge/Jellyfin-streaming-00A4DC?style=for-the-badge&logo=jellyfin&logoColor=white)
 ![Minecraft](https://img.shields.io/badge/Minecraft-servidor-62B47A?style=for-the-badge)
 ![Espacio disponible](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FOskillar28%2Fraco-hosting%2Fmain%2Fdocs%2Fcapacidad.json&query=%24.disponible_tb&suffix=%20TB&label=espacio%20disponible&color=e08a00&style=for-the-badge&cacheSeconds=300)
@@ -138,6 +139,22 @@ flowchart TB
 [![Web de Racó Hosting](docs/captura-web.jpg)](https://oskillar28.github.io/raco-hosting/)
 
 **https://oskillar28.github.io/raco-hosting/**
+
+## 🐳 Desplegar con Docker
+
+La web también se publica como imagen Docker en **GitHub Packages**, lista para ejecutarse en cualquier NAS o servidor con Docker:
+
+```bash
+docker run -d -p 8080:80 --name raco-web --restart unless-stopped ghcr.io/oskillar28/raco-hosting:latest
+```
+
+Después se abre en `http://IP-DEL-NAS:8080`. Para actualizarla:
+
+```bash
+docker pull ghcr.io/oskillar28/raco-hosting:latest && docker rm -f raco-web && docker run -d -p 8080:80 --name raco-web --restart unless-stopped ghcr.io/oskillar28/raco-hosting:latest
+```
+
+La imagen (nginx + la web) se construye y publica automáticamente con GitHub Actions cada vez que cambia la web.
 
 ## 📬 Contacto
 
