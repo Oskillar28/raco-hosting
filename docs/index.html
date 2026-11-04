@@ -98,6 +98,20 @@ section{padding-block:64px;border-top:1px solid var(--line)}
 .tier{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--line);padding-bottom:6px;font-size:.95rem}
 .tier b{font-family:var(--mono)}
 
+/* Contador de capacidad */
+.capacity{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px 24px;margin-bottom:24px;display:grid;grid-template-columns:auto 1fr;gap:10px 28px;align-items:center}
+.capacity > *{min-width:0}
+.cap-num{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cap-num small{font-family:var(--body);font-weight:400;font-size:1rem;color:var(--muted)}
+.cap-bar{height:14px;border-radius:7px;background:color-mix(in srgb,var(--line) 70%,transparent);overflow:hidden;display:flex}
+.cap-bar span{display:block;height:100%;background:var(--led);transition:width .6s ease}
+.cap-legend{display:flex;flex-wrap:wrap;gap:6px 20px;font-family:var(--mono);font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums;margin-top:8px}
+.cap-legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.cap-legend .k-used{background:var(--led)}
+.cap-legend .k-free{background:color-mix(in srgb,var(--line) 70%,transparent);border:1px solid var(--line)}
+@media (max-width:600px){.capacity{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.cap-bar span{transition:none}}
+
 /* Jellyfin explicado */
 .explain{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
 .explain > *{min-width:0}
@@ -214,6 +228,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <h2>Tres servicios, precio mensual fijo</h2>
         <p>Pagas mes a mes y lo dejas cuando quieras. Todos los precios son finales.</p>
       </div>
+      <div class="capacity" id="capacidad" aria-live="polite">
+        <div>
+          <p class="eyebrow">Espacio disponible para alquilar</p>
+          <div class="cap-num"><span id="cap-free">80</span> TB<small> de <span id="cap-total">80</span> TB</small></div>
+        </div>
+        <div>
+          <div class="cap-bar" role="img" id="cap-bar-label" aria-label="0 TB alquilados de 80 TB"><span id="cap-used-bar" style="width:0%"></span></div>
+          <div class="cap-legend"><span><i class="k-used"></i>Alquilado: <b id="cap-used">0</b> TB</span><span><i class="k-free"></i>Libre: <b id="cap-free2">80</b> TB</span><span id="cap-date"></span></div>
+        </div>
+      </div>
       <div class="plans">
         <article class="plan">
           <div class="tag"><span>Streaming</span><b>Jellyfin</b></div>
@@ -290,7 +314,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
             <tr><td>NAS-01 · AS5404T</td><td>Servicios</td><td>4 bahías. Jellyfin, contenedores Docker y máquinas virtuales de laboratorio.</td></tr>
             <tr><td>NAS-02 · AS6806T</td><td>Almacenamiento y copias</td><td>6 bahías. Espacio de clientes y copias de seguridad cruzadas con NAS-01.</td></tr>
             <tr><td>Acceso remoto</td><td>Seguridad</td><td>Conexión cifrada (VPN/túnel). No se abren puertos del router a internet.</td></tr>
-            <tr><td>Protección de datos</td><td>Fiabilidad</td><td>Discos en RAID y copias periódicas entre los dos NAS.</td></tr>
+            <tr><td>Protección de datos</td><td>Fiabilidad</td><td>Volumen en RAID 5 (aguanta el fallo de un disco) y copias periódicas entre los dos NAS.</td></tr>
             <tr><td>SAI</td><td>Energía</td><td>Sistema de alimentación ininterrumpida: aguanta cortes breves de luz y apaga los NAS de forma segura si el corte se alarga.</td></tr>
           </tbody>
         </table>
@@ -369,6 +393,24 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 /* Pega aquí la dirección de tu formulario de Formspree (https://formspree.io/f/xxxxxxx).
    Tu correo real nunca aparece en esta página. */
 var FORM_ENDPOINT = "https://formspree.io/f/mqppnykl";
+
+/* Contador de capacidad: lee capacidad.json (total_tb y alquilado_tb) */
+(function(){
+  function fmt(n){return (Math.round(n*100)/100).toLocaleString('es-ES');}
+  function pintar(d){
+    var total=Number(d.total_tb)||80, usado=Math.min(Math.max(Number(d.alquilado_tb)||0,0),total), libre=total-usado;
+    document.getElementById('cap-total').textContent=fmt(total);
+    document.getElementById('cap-free').textContent=fmt(libre);
+    document.getElementById('cap-free2').textContent=fmt(libre);
+    document.getElementById('cap-used').textContent=fmt(usado);
+    document.getElementById('cap-used-bar').style.width=(usado/total*100)+'%';
+    document.getElementById('cap-bar-label').setAttribute('aria-label',fmt(usado)+' TB alquilados de '+fmt(total)+' TB');
+    if(d.actualizado){document.getElementById('cap-date').textContent='Actualizado: '+new Date(d.actualizado).toLocaleDateString('es-ES');}
+  }
+  var RAW='https://raw.githubusercontent.com/Oskillar28/raco-hosting/main/docs/capacidad.json';
+  function leer(u){return fetch(u+'?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json();});}
+  leer(RAW).catch(function(){return leer('capacidad.json');}).then(pintar).catch(function(){});
+})();
 
 (function(){
   var f=document.getElementById('contact-form'),btn=document.getElementById('f-enviar'),st=document.getElementById('f-status');

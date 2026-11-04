@@ -1,0 +1,78 @@
+name: Actualizar espacio alquilado
+
+# Se lanza a mano desde la pestaña Actions → "Actualizar espacio alquilado" → Run workflow.
+# Actualiza docs/capacidad.json, que alimenta el contador de la web y la insignia del README.
+on:
+  workflow_dispatch:
+    inputs:
+      accion:
+        description: "¿Alquilar espacio a un cliente o liberarlo?"
+        required: true
+        type: choice
+        options:
+          - alquilar
+          - liberar
+      tb:
+        description: "Cantidad de TB (por ejemplo 1)"
+        required: true
+        default: "1"
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: capacidad
+  cancel-in-progress: false
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Recalcular capacidad
+        env:
+          ACCION: ${{ inputs.accion }}
+          TB: ${{ inputs.tb }}
+        run: |
+          python3 - <<'PY'
+          import json, os, sys, datetime
+          ruta = "docs/capacidad.json"
+          d = json.load(open(ruta, encoding="utf-8"))
+          try:
+              tb = float(os.environ["TB"].replace(",", "."))
+          except ValueError:
+              sys.exit("La cantidad de TB no es un número válido.")
+          if tb <= 0:
+              sys.exit("La cantidad de TB tiene que ser mayor que 0.")
+          total = float(d["total_tb"])
+          usado = float(d["alquilado_tb"])
+          if os.environ["ACCION"] == "alquilar":
+              if usado + tb > total:
+                  sys.exit(f"No hay espacio: quedan {total - usado:g} TB libres.")
+              usado += tb
+          else:
+              if tb > usado:
+                  sys.exit(f"No se puede liberar {tb:g} TB: solo hay {usado:g} TB alquilados.")
+              usado -= tb
+          usado = round(usado, 2)
+          d["alquilado_tb"] = int(usado) if usado.is_integer() else usado
+          libre = round(total - usado, 2)
+          d["disponible_tb"] = int(libre) if libre.is_integer() else libre
+          d["actualizado"] = datetime.date.today().isoformat()
+          json.dump(d, open(ruta, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+          open(ruta, "a").write("\n")
+          print(f"Alquilado: {d['alquilado_tb']} TB · Libre: {d['disponible_tb']} TB de {d['total_tb']} TB")
+          PY
+
+      - name: Guardar el cambio
+        env:
+          ACCION: ${{ inputs.accion }}
+          TB: ${{ inputs.tb }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/capacidad.json
+          git commit -m "capacidad: ${ACCION} ${TB} TB"
+          git push
