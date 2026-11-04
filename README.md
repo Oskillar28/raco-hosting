@@ -45,7 +45,7 @@ Estudio **2º de SMX** y llevo a la práctica lo que aprendo en clase con un lab
 
 ## 💶 Servicios y tarifas
 
-### 🎬 Jellyfin — 3 €/mes
+### 🎬 Jellyfin — 5 €/mes
 
 **¿Qué es?** [Jellyfin](https://jellyfin.org) es un software libre y gratuito que convierte un servidor en tu propio servicio de streaming. Organiza películas, series, música y fotos, descarga portadas y sinopsis, recuerda por dónde te quedaste y lo reproduce en cualquier dispositivo.
 
