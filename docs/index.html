@@ -3,63 +3,142 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Racó Hosting</title>
+<title>Racó Hosting — Nube privada en Terrassa</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Racó Hosting: Jellyfin, servidores de Minecraft y almacenamiento en la nube privada de un alumno de 2º SMX.">
+<meta name="description" content="Racó Hosting: Jellyfin streaming, servidores de Minecraft y almacenamiento en la nube privada. Alojado en hardware real en Terrassa (Barcelona). Sin permanencia.">
+<meta name="keywords" content="jellyfin, minecraft servidor, almacenamiento privado, nube privada, terrassa, nas, hosting personal">
+<meta name="author" content="Óscar Ramírez">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://oskillar28.github.io/raco-hosting/">
+<!-- Open Graph / Social -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://oskillar28.github.io/raco-hosting/">
+<meta property="og:title" content="Racó Hosting — Nube privada en Terrassa">
+<meta property="og:description" content="Jellyfin, Minecraft y almacenamiento privado en hardware de verdad. Sin permanencia, trato directo.">
+<meta property="og:image" content="https://oskillar28.github.io/raco-hosting/captura-web.jpg">
+<meta property="og:locale" content="es_ES">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Racó Hosting — Nube privada en Terrassa">
+<meta name="twitter:description" content="Jellyfin, Minecraft y almacenamiento privado en hardware real. Sin permanencia, desde 5 €/mes.">
+<meta name="twitter:image" content="https://oskillar28.github.io/raco-hosting/captura-web.jpg">
+<!-- Schema.org LocalBusiness -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"LocalBusiness",
+  "name":"Racó Hosting",
+  "description":"Nube privada autogestionada: Jellyfin, servidores de Minecraft y almacenamiento.",
+  "url":"https://oskillar28.github.io/raco-hosting/",
+  "addressLocality":"Terrassa",
+  "addressRegion":"Cataluña",
+  "addressCountry":"ES",
+  "priceRange":"5€–10€/mes",
+  "contactType":"customer service"
+}
+</script>
+<!-- Fuentes -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,700;112,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
-/* Layout: ficha técnica de un rack — cabecera con la "fachada" de los dos NAS, luego bahías = servicios */
+/* Layout: ficha técnica de un rack — cabecera, hero con dos NAS, luego secciones */
 :root{
   --bg:#eef0ee; --panel:#f8f9f7; --ink:#1b211f; --muted:#59625e; --line:#cfd5d1;
-  --chassis:#2a302d; --chassis-2:#3a413d; --led:#e08a00; --led-ok:#2e9e5b; --accent:#0f6b5c; --accent-ink:#ffffff;
+  --chassis:#2a302d; --chassis-2:#3a413d; --led:#e08a00; --led-ok:#2e9e5b;
+  --accent:#0f6b5c; --accent-ink:#ffffff; --accent-hover:#0a5247;
+  --danger:#c0392b;
   --display:"Archivo","Arial Narrow",Arial,sans-serif;
   --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --radius:10px; --radius-sm:6px;
+  --shadow:0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.06);
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#121614; --panel:#1a1f1d; --ink:#e6ebe8; --muted:#9aa5a0; --line:#2e3532;
-  --chassis:#0b0e0d; --chassis-2:#252b28; --led:#ffa726; --led-ok:#4cc77f; --accent:#4fbfa9; --accent-ink:#0b1311; color-scheme:dark}}
+  --chassis:#0b0e0d; --chassis-2:#252b28; --led:#ffa726; --led-ok:#4cc77f;
+  --accent:#4fbfa9; --accent-ink:#0b1311; --accent-hover:#3dada0;
+  --danger:#e57373;
+  --shadow:0 1px 3px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+  color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#121614; --panel:#1a1f1d; --ink:#e6ebe8; --muted:#9aa5a0; --line:#2e3532;
-  --chassis:#0b0e0d; --chassis-2:#252b28; --led:#ffa726; --led-ok:#4cc77f; --accent:#4fbfa9; --accent-ink:#0b1311; color-scheme:dark}
+  --chassis:#0b0e0d; --chassis-2:#252b28; --led:#ffa726; --led-ok:#4cc77f;
+  --accent:#4fbfa9; --accent-ink:#0b1311; --accent-hover:#3dada0;
+  --danger:#e57373;
+  --shadow:0 1px 3px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+  color-scheme:dark}
 
-*{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;margin:0}
+*{box-sizing:border-box; margin:0}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;min-height:100vh}
 .wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-h1,h2,h3{font-family:var(--display);font-stretch:112%;line-height:1.1;text-wrap:balance;margin:0}
+h1,h2,h3{font-family:var(--display);font-stretch:112%;line-height:1.1;text-wrap:balance}
 h2{font-size:clamp(1.6rem,3.5vw,2.3rem);font-weight:800}
-h3{font-size:1.25rem;font-weight:700}
+h3{font-size:1.2rem;font-weight:700}
 p{margin:0}
 a{color:var(--accent)}
+a:hover{color:var(--accent-hover)}
 a:focus-visible,button:focus-visible{outline:3px solid var(--led);outline-offset:3px;border-radius:4px}
 .eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .mono{font-family:var(--mono)}
 
-/* Cabecera */
-header.top{border-bottom:1px solid var(--line)}
-header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-stretch:112%;font-weight:800;font-size:1.25rem;color:var(--ink);text-decoration:none}
-.brand i{width:12px;height:12px;border-radius:50%;background:var(--led-ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--led-ok) 25%,transparent)}
-nav{display:flex;gap:18px;flex-wrap:wrap}
-nav a{color:var(--muted);text-decoration:none;font-size:.95rem}
-nav a:hover{color:var(--ink)}
+/* ── Skip link ─────────────────── */
+.skip-link{position:absolute;left:-9999px;top:auto;z-index:999}
+.skip-link:focus{position:fixed;top:0;left:0;background:var(--accent);color:var(--accent-ink);padding:12px 20px;font-weight:700;border-radius:0 0 var(--radius-sm) 0}
 
-/* Hero */
+/* ── Cabecera ─────────────────── */
+header.top{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:200;background:var(--bg);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-stretch:112%;font-weight:800;font-size:1.25rem;color:var(--ink);text-decoration:none}
+.brand:hover{color:var(--accent)}
+.brand i{width:12px;height:12px;border-radius:50%;background:var(--led-ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--led-ok) 25%,transparent);flex-shrink:0}
+nav{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+nav a{color:var(--muted);text-decoration:none;font-size:.95rem;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:color .15s, border-color .15s}
+nav a:hover{color:var(--ink);border-color:var(--accent)}
+nav a.active{color:var(--accent);border-color:var(--accent)}
+.header-actions{display:flex;align-items:center;gap:10px}
+
+/* Theme toggle */
+.theme-toggle{background:transparent;border:1px solid var(--line);border-radius:var(--radius-sm);padding:7px 10px;cursor:pointer;color:var(--muted);font-size:1rem;line-height:1;transition:border-color .15s, color .15s;display:flex;align-items:center}
+.theme-toggle:hover{border-color:var(--accent);color:var(--ink)}
+.theme-toggle .icon-sun{display:none}
+.theme-toggle .icon-moon{display:block}
+[data-theme="dark"] .theme-toggle .icon-sun,
+.dark-mode .theme-toggle .icon-sun{display:block}
+[data-theme="dark"] .theme-toggle .icon-moon,
+.dark-mode .theme-toggle .icon-moon{display:none}
+
+/* Hamburguesa móvil */
+.menu-toggle{display:none;background:transparent;border:1px solid var(--line);border-radius:var(--radius-sm);padding:7px 10px;cursor:pointer;color:var(--muted);font-size:1.1rem;line-height:1;align-items:center}
+.menu-toggle:hover{border-color:var(--accent);color:var(--ink)}
+nav[aria-expanded="true"]{display:flex}
+@media(max-width:860px){
+  nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:flex-start;background:var(--panel);border-bottom:1px solid var(--line);padding:12px max(16px,env(safe-area-inset-left,0px));gap:4px;z-index:300;box-shadow:var(--shadow)}
+  nav[aria-expanded="true"]{display:flex}
+  nav a{padding:10px 0;width:100%;border-bottom:1px solid var(--line);font-size:1rem}
+  nav a:last-child{border-bottom:none}
+  .menu-toggle{display:flex}
+}
+
+/* ── Hero ─────────────────────── */
 .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding-block:64px 56px}
 .hero h1{font-size:clamp(2.2rem,5.5vw,3.9rem);font-weight:800;margin-top:12px}
 .hero h1 em{font-style:normal;color:var(--accent)}
 .hero .lead{margin-top:18px;max-width:34em;color:var(--muted);font-size:1.1rem}
 .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:6px;font-weight:700;text-decoration:none;border:2px solid var(--accent);font-family:var(--body);font-size:1rem;cursor:pointer}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:var(--radius-sm);font-weight:700;text-decoration:none;border:2px solid var(--accent);font-family:var(--body);font-size:1rem;cursor:pointer;transition:background .15s, color .15s, transform .1s;user-select:none;white-space:nowrap}
 .btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{background:var(--accent-hover);border-color:var(--accent-hover)}
 .btn.ghost{background:transparent;color:var(--accent)}
-.hero > .wrap > div{min-width:0}
+.btn.ghost:hover{background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.btn:active{transform:scale(.97)}
+.hero>.wrap>div{min-width:0}
 
-/* Fachada NAS */
+/* NAS / Rack */
 .rack{display:grid;gap:14px}
-.nas{background:var(--chassis);border-radius:10px;padding:14px;color:#cfd8d3}
+.nas{background:var(--chassis);border-radius:var(--radius);padding:14px;color:#cfd8d3;box-shadow:var(--shadow)}
 .nas-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;margin-bottom:10px;color:#9fb0a8}
 .bays{display:grid;gap:6px}
 .bays.b4{grid-template-columns:repeat(4,1fr)}
@@ -71,132 +150,169 @@ nav a:hover{color:var(--ink)}
 .bay.free{background:transparent;border:1px dashed #ffffff40}
 .bay.free::before{display:none}
 .bay.free::after{background:#ffffff30}
-.bay.free span{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--mono);font-size:.62rem;color:#ffffffa0;text-align:center}
+.bay.free span{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--mono);font-size:.62rem;color:#ffffffa0;text-align:center;line-height:1.3}
 @keyframes blink{50%{opacity:.25}}
-@media (prefers-reduced-motion:reduce){.bay.act::after{animation:none}}
+@media(prefers-reduced-motion:reduce){.bay.act::after{animation:none}}
 .rack-note{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
 
-/* Secciones */
+/* ── Secciones ──────────────── */
 section{padding-block:64px;border-top:1px solid var(--line)}
 .sec-head{display:grid;gap:10px;margin-bottom:32px;max-width:44em}
 .sec-head p{color:var(--muted)}
 
-/* Servicios */
+/* ── Contador de capacidad ─── */
+.capacity{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px 24px;margin-bottom:24px;display:grid;grid-template-columns:auto 1fr;gap:10px 28px;align-items:center;box-shadow:var(--shadow)}
+.capacity>*{min-width:0}
+.cap-num{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cap-num small{font-family:var(--body);font-weight:400;font-size:1rem;color:var(--muted)}
+.cap-bar{height:14px;border-radius:7px;background:color-mix(in srgb,var(--line) 70%,transparent);overflow:hidden;display:flex}
+.cap-bar span{display:block;height:100%;background:var(--led);transition:width .6s ease}
+@media(prefers-reduced-motion:reduce){.cap-bar span{transition:none}}
+.cap-legend{display:flex;flex-wrap:wrap;gap:6px 20px;font-family:var(--mono);font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums;margin-top:8px}
+.cap-legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.cap-legend .k-used{background:var(--led)}
+.cap-legend .k-free{background:color-mix(in srgb,var(--line) 70%,transparent);border:1px solid var(--line)}
+@media(max-width:600px){.capacity{grid-template-columns:1fr}}
+
+/* ── Planes ─────────────────── */
 .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.plan{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:26px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.plan{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px;display:flex;flex-direction:column;gap:16px;min-width:0;box-shadow:var(--shadow);transition:box-shadow .2s, transform .15s}
+.plan:hover{box-shadow:0 2px 8px rgba(0,0,0,.12),0 8px 32px rgba(0,0,0,.1);transform:translateY(-2px)}
+@media(prefers-reduced-motion:reduce){.plan:hover{transform:none}}
 .plan.feat{border:2px solid var(--accent)}
 .plan .tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between}
 .plan .tag b{color:var(--accent);font-weight:600}
 .price{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:2.6rem;line-height:1;font-variant-numeric:tabular-nums}
 .price small{font-family:var(--body);font-size:1rem;font-weight:400;color:var(--muted)}
-.plan ul{list-style:none;padding:0;margin:0;display:grid;gap:8px;font-size:.97rem}
+.plan ul{list-style:none;padding:0;display:grid;gap:8px;font-size:.97rem}
 .plan li{padding-left:22px;position:relative}
 .plan li::before{content:"";position:absolute;left:2px;top:.62em;width:10px;height:2px;background:var(--accent)}
 .plan .what{color:var(--muted);font-size:.97rem}
 .plan .btn{margin-top:auto;justify-content:center}
+.badge-pop{display:inline-block;background:var(--accent);color:var(--accent-ink);font-family:var(--mono);font-size:.7rem;font-weight:700;border-radius:999px;padding:2px 9px;vertical-align:middle;margin-left:6px;letter-spacing:.05em}
 .tiers{display:grid;gap:8px;font-variant-numeric:tabular-nums}
 .tier{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--line);padding-bottom:6px;font-size:.95rem}
 .tier b{font-family:var(--mono)}
 
-/* Contador de capacidad */
-.capacity{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px 24px;margin-bottom:24px;display:grid;grid-template-columns:auto 1fr;gap:10px 28px;align-items:center}
-.capacity > *{min-width:0}
-.cap-num{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
-.cap-num small{font-family:var(--body);font-weight:400;font-size:1rem;color:var(--muted)}
-.cap-bar{height:14px;border-radius:7px;background:color-mix(in srgb,var(--line) 70%,transparent);overflow:hidden;display:flex}
-.cap-bar span{display:block;height:100%;background:var(--led);transition:width .6s ease}
-.cap-legend{display:flex;flex-wrap:wrap;gap:6px 20px;font-family:var(--mono);font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums;margin-top:8px}
-.cap-legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:middle}
-.cap-legend .k-used{background:var(--led)}
-.cap-legend .k-free{background:color-mix(in srgb,var(--line) 70%,transparent);border:1px solid var(--line)}
-@media (max-width:600px){.capacity{grid-template-columns:1fr}}
-@media (prefers-reduced-motion:reduce){.cap-bar span{transition:none}}
-
-/* Jellyfin explicado */
+/* ── Jellyfin ─────────────── */
 .explain{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
-.explain > *{min-width:0}
-.explain p + p{margin-top:14px}
+.explain>*{min-width:0}
+.explain p+p{margin-top:14px}
 .flow{display:grid;gap:10px}
-.step{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.step{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;box-shadow:var(--shadow)}
 .step .n{font-family:var(--mono);font-weight:600;color:var(--accent);font-size:.9rem;padding-top:2px}
 .step p{font-size:.95rem;color:var(--muted)}
 .step b{color:var(--ink)}
 
-/* Infra */
+/* ── Infraestructura ───────── */
+.spec-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);box-shadow:var(--shadow)}
 .specs{width:100%;border-collapse:collapse;font-size:.95rem}
-.spec-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
 .specs th,.specs td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
 .specs tr:last-child td{border-bottom:0}
 .specs th{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap}
 .specs td:first-child{font-weight:700;white-space:nowrap}
 
-/* Sobre mí */
+/* ── Sobre mí ───────────────── */
 .about{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px}
-.about > *{min-width:0}
-.about p + p{margin-top:14px}
+.about>*{min-width:0}
+.about p+p{margin-top:14px}
 .skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
 .skills span{font-family:var(--mono);font-size:.8rem;border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--muted)}
 
-/* FAQ */
+/* ── FAQ ──────────────────── */
 .faq{display:grid;gap:10px;max-width:780px}
-details{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 18px}
-summary{cursor:pointer;font-weight:700}
+details{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 18px;transition:box-shadow .15s}
+details[open]{box-shadow:var(--shadow)}
+summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"▾";font-size:.85rem;color:var(--muted);transition:transform .2s;flex-shrink:0}
+details[open] summary::after{transform:rotate(-180deg)}
+@media(prefers-reduced-motion:reduce){summary::after{transition:none}}
 details p{margin-top:10px;color:var(--muted)}
 
-/* Contacto */
-.contact{background:var(--chassis);color:#e6ece9;border-radius:12px;padding:36px;display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
-.contact > *{min-width:0}
+/* ── Contacto ─────────────── */
+.contact{background:var(--chassis);color:#e6ece9;border-radius:12px;padding:36px;display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:start}
+.contact>*{min-width:0}
 .contact h2{color:#fff}
 .contact p{color:#b7c4be;margin-top:10px}
-.contact{grid-template-columns:.9fr 1.1fr;align-items:start}
 .form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .field{display:grid;gap:6px;min-width:0}
 .field.full{grid-column:1 / -1}
-.field label{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:#9fb0a8}
-.field input,.field select,.field textarea{width:100%;font:inherit;font-size:1rem;color:#fff;background:#ffffff10;border:1px solid #ffffff30;border-radius:6px;padding:10px 12px;color-scheme:dark}
+.field label{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:#9fb0a8;display:flex;align-items:center;gap:6px}
+.field label .req{color:var(--led);font-size:.8em}
+.field input,.field select,.field textarea{width:100%;font:inherit;font-size:1rem;color:#fff;background:#ffffff10;border:1px solid #ffffff30;border-radius:var(--radius-sm);padding:10px 12px;color-scheme:dark;transition:border-color .15s, outline .15s}
 .field textarea{min-height:110px;resize:vertical}
 .field select option{background:#2a302d;color:#ffffff}
-.field select option:checked{background:#0f6b5c;color:#ffffff}
 .field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--led);outline-offset:1px;border-color:transparent}
+.field input.invalid,.field textarea.invalid{border-color:var(--danger) !important}
+.field .err-msg{font-family:var(--mono);font-size:.75rem;color:#ffb4a8;display:none;margin-top:4px}
+.field input.invalid ~ .err-msg,
+.field textarea.invalid ~ .err-msg{display:block}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .send{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.send button{background:var(--led);color:#1b1205;border:0;border-radius:6px;padding:12px 22px;font-weight:700;font-family:var(--body);font-size:1rem;cursor:pointer}
+.send button{background:var(--led);color:#1b1205;border:0;border-radius:var(--radius-sm);padding:12px 22px;font-weight:700;font-family:var(--body);font-size:1rem;cursor:pointer;transition:opacity .15s, transform .1s}
+.send button:hover{opacity:.9}
+.send button:active{transform:scale(.97)}
 .send button[disabled]{opacity:.6;cursor:wait}
 .status{font-size:.95rem;color:#b7c4be}
 .status.ok{color:var(--led-ok)}
 .status.err{color:#ffb4a8}
 .privacy{grid-column:1 / -1;font-size:.82rem;color:#9fb0a8}
 
-footer{padding-block:32px;color:var(--muted);font-size:.85rem}
-footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+/* ── Footer ─────────────────── */
+footer{padding-block:32px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+.footer-links{display:flex;gap:16px;flex-wrap:wrap}
+.footer-links a{color:var(--muted);text-decoration:none;font-size:.85rem}
+.footer-links a:hover{color:var(--accent)}
 
-@media (max-width:860px){
+/* ── Back to top ─────────────── */
+.back-top{position:fixed;bottom:max(24px,env(safe-area-inset-bottom,0px));right:max(24px,env(safe-area-inset-right,0px));background:var(--accent);color:var(--accent-ink);border:none;border-radius:50%;width:44px;height:44px;font-size:1.2rem;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:100;transition:opacity .2s, transform .15s}
+.back-top.visible{display:flex}
+.back-top:hover{transform:translateY(-2px)}
+@media(prefers-reduced-motion:reduce){.back-top:hover{transform:none}}
+
+/* ── Responsive ──────────────── */
+@media(max-width:860px){
   .hero .wrap,.explain,.about,.contact{grid-template-columns:1fr}
   .plans{grid-template-columns:1fr}
   .hero .wrap{padding-block:40px}
   section{padding-block:48px}
   .contact{padding:24px}
-  nav{display:none}
+}
+@media(max-width:600px){
+  .form{grid-template-columns:1fr}
+  .field.full,.send,.privacy{grid-column:1}
 }
 </style>
 </head>
 <body>
 
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#inicio"><i aria-hidden="true"></i>Racó Hosting</a>
-    <nav aria-label="Secciones">
-      <a href="#servicios">Servicios</a>
-      <a href="#jellyfin">¿Qué es Jellyfin?</a>
-      <a href="#infraestructura">Infraestructura</a>
-      <a href="#sobre-mi">Sobre mí</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
+    <a class="brand" href="#inicio" aria-label="Racó Hosting — inicio"><i aria-hidden="true"></i>Racó Hosting</a>
+    <div class="header-actions">
+      <button class="menu-toggle" id="menu-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Abrir menú">☰</button>
+      <nav id="main-nav" aria-label="Secciones" aria-expanded="false">
+        <a href="#servicios">Servicios</a>
+        <a href="#jellyfin">¿Qué es Jellyfin?</a>
+        <a href="#infraestructura">Infraestructura</a>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
+        <span class="icon-moon" aria-hidden="true">🌙</span>
+        <span class="icon-sun" aria-hidden="true">☀️</span>
+      </button>
+    </div>
   </div>
 </header>
 
-<main id="inicio">
-  <div class="hero">
+<main id="main">
+  <div class="hero" id="inicio">
     <div class="wrap">
       <div>
         <p class="eyebrow">Nube privada · Terrassa (Barcelona)</p>
@@ -207,16 +323,23 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <a class="btn ghost" href="#contacto">Pedir información</a>
         </div>
       </div>
-      <div class="rack" aria-label="Los dos servidores NAS">
+      <div class="rack" aria-label="Los dos servidores NAS de Racó Hosting" role="img">
         <div class="nas">
           <div class="nas-head"><span>NAS-01 · ASUSTOR AS5404T</span><span>4 BAHÍAS</span></div>
-          <div class="bays b4"><div class="bay act"></div><div class="bay"></div><div class="bay act"></div><div class="bay"></div></div>
+          <div class="bays b4" aria-hidden="true">
+            <div class="bay act"></div><div class="bay"></div><div class="bay act"></div><div class="bay"></div>
+          </div>
         </div>
         <div class="nas">
           <div class="nas-head"><span>NAS-02 · ASUSTOR AS6806T</span><span>6 BAHÍAS</span></div>
-          <div class="bays b6"><div class="bay"></div><div class="bay act"></div><div class="bay"></div><div class="bay act"></div><div class="bay free"><span>1 TB<br>libre</span></div><div class="bay free"><span>1 TB<br>libre</span></div></div>
+          <div class="bays b6" aria-hidden="true">
+            <div class="bay"></div><div class="bay act"></div><div class="bay"></div>
+            <div class="bay act"></div>
+            <div class="bay free"><span>1 TB<br>libre</span></div>
+            <div class="bay free"><span>1 TB<br>libre</span></div>
+          </div>
         </div>
-        <p class="rack-note">● actividad &nbsp;● en línea &nbsp;◌ capacidad disponible para alquilar</p>
+        <p class="rack-note" aria-hidden="true">● actividad &nbsp;● en línea &nbsp;◌ capacidad disponible para alquilar</p>
       </div>
     </div>
   </div>
@@ -228,18 +351,26 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <h2>Tres servicios, precio mensual fijo</h2>
         <p>Pagas mes a mes y lo dejas cuando quieras. Todos los precios son finales.</p>
       </div>
-      <div class="capacity" id="capacidad" aria-live="polite">
+
+      <div class="capacity" id="capacidad" aria-live="polite" aria-label="Capacidad de almacenamiento disponible">
         <div>
           <p class="eyebrow">Espacio disponible para alquilar</p>
           <div class="cap-num"><span id="cap-free">80</span> TB<small> de <span id="cap-total">80</span> TB</small></div>
         </div>
         <div>
-          <div class="cap-bar" role="img" id="cap-bar-label" aria-label="0 TB alquilados de 80 TB"><span id="cap-used-bar" style="width:0%"></span></div>
-          <div class="cap-legend"><span><i class="k-used"></i>Alquilado: <b id="cap-used">0</b> TB</span><span><i class="k-free"></i>Libre: <b id="cap-free2">80</b> TB</span><span id="cap-date"></span></div>
+          <div class="cap-bar" role="img" id="cap-bar-label" aria-label="0 TB alquilados de 80 TB">
+            <span id="cap-used-bar" style="width:0%"></span>
+          </div>
+          <div class="cap-legend">
+            <span><i class="k-used" aria-hidden="true"></i>Alquilado: <b id="cap-used">0</b> TB</span>
+            <span><i class="k-free" aria-hidden="true"></i>Libre: <b id="cap-free2">80</b> TB</span>
+            <span id="cap-date"></span>
+          </div>
         </div>
       </div>
-      <div class="plans">
-        <article class="plan">
+
+      <div class="plans" role="list">
+        <article class="plan" role="listitem">
           <div class="tag"><span>Streaming</span><b>Jellyfin</b></div>
           <div class="price">5 €<small> /mes</small></div>
           <p class="what">Tu propio servidor multimedia privado: películas, series, música y fotos que tú subes, disponibles en cualquier pantalla.</p>
@@ -249,10 +380,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
             <li>Acceso desde fuera de casa por conexión cifrada</li>
             <li>Sin anuncios y sin suscripción a terceros</li>
           </ul>
-          <a class="btn ghost" href="#contacto">Contratar Jellyfin</a>
+          <a class="btn ghost" href="#contacto" aria-label="Contratar Jellyfin por 5 euros al mes">Contratar Jellyfin</a>
         </article>
-        <article class="plan feat">
-          <div class="tag"><span>Juego</span><b>Minecraft</b></div>
+
+        <article class="plan feat" role="listitem">
+          <div class="tag"><span>Juego</span><b>Minecraft <span class="badge-pop">Popular</span></b></div>
           <div class="price">10 €<small> /mes</small></div>
           <p class="what">Un servidor de Minecraft solo para tu grupo de amigos, encendido 24/7 y sin depender del PC de nadie.</p>
           <ul>
@@ -262,22 +394,23 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
             <li>Instalación de plugins o mods bajo petición</li>
             <li>Pensado para grupos pequeños (hasta ~10 jugadores)</li>
           </ul>
-          <a class="btn primary" href="#contacto">Contratar Minecraft</a>
+          <a class="btn primary" href="#contacto" aria-label="Contratar servidor Minecraft por 10 euros al mes">Contratar Minecraft</a>
         </article>
-        <article class="plan">
-          <div class="tag"><span>Almacenamiento</span><b>1 TB</b></div>
+
+        <article class="plan" role="listitem">
+          <div class="tag"><span>Almacenamiento</span><b>Desde 1 TB</b></div>
           <div class="price">5 €<small> /mes</small></div>
-          <p class="what">1 TB de espacio privado en mis NAS para guardar copias de seguridad, fotos o documentos.</p>
+          <p class="what">Espacio privado en mis NAS para guardar copias de seguridad, fotos o documentos.</p>
           <div class="tiers">
             <div class="tier"><span>Básico · 1 TB</span><b>5 €/mes</b></div>
-            <div class="tier"><span>Con copia en el 2.º NAS · 1 TB</span><b>7 €/mes</b></div>
+            <div class="tier"><span>Plus · 1 TB + copia 2.º NAS</span><b>7 €/mes</b></div>
           </div>
           <ul>
             <li>Carpeta privada con usuario y contraseña propios</li>
             <li>Acceso por web, app o unidad de red</li>
             <li>Discos en RAID y servidores protegidos con SAI</li>
           </ul>
-          <a class="btn ghost" href="#contacto">Contratar espacio</a>
+          <a class="btn ghost" href="#contacto" aria-label="Contratar espacio de almacenamiento desde 5 euros al mes">Contratar espacio</a>
         </article>
       </div>
     </div>
@@ -291,11 +424,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <p>Jellyfin es un programa libre y gratuito que convierte un servidor en tu propio "Netflix privado". Ordena tus películas, series y música, descarga las carátulas y sinopsis, recuerda por dónde te quedaste y lo reproduce en la tele, el móvil o el ordenador.</p>
         <p>La diferencia con una plataforma de pago es que el contenido es tuyo: lo que subes no desaparece del catálogo y nadie analiza lo que ves. Yo me encargo de que el servidor esté encendido, actualizado y accesible.</p>
       </div>
-      <div class="flow" aria-label="Cómo funciona">
-        <div class="step"><span class="n">01</span><p><b>Subes tu contenido.</b> Tus vídeos, música o fotos se guardan en tu carpeta del NAS.</p></div>
-        <div class="step"><span class="n">02</span><p><b>Jellyfin lo organiza.</b> Detecta títulos, añade portadas, idiomas y subtítulos.</p></div>
-        <div class="step"><span class="n">03</span><p><b>Lo ves donde quieras.</b> Entras con tu usuario desde la Smart TV, el móvil o el navegador.</p></div>
-        <div class="step"><span class="n">04</span><p><b>Sigue donde lo dejaste.</b> Empiezas en el salón y terminas en el móvil.</p></div>
+      <div class="flow" aria-label="Cómo funciona Jellyfin">
+        <div class="step"><span class="n" aria-hidden="true">01</span><p><b>Subes tu contenido.</b> Tus vídeos, música o fotos se guardan en tu carpeta del NAS.</p></div>
+        <div class="step"><span class="n" aria-hidden="true">02</span><p><b>Jellyfin lo organiza.</b> Detecta títulos, añade portadas, idiomas y subtítulos.</p></div>
+        <div class="step"><span class="n" aria-hidden="true">03</span><p><b>Lo ves donde quieras.</b> Entras con tu usuario desde la Smart TV, el móvil o el navegador.</p></div>
+        <div class="step"><span class="n" aria-hidden="true">04</span><p><b>Sigue donde lo dejaste.</b> Empiezas en el salón y terminas en el móvil.</p></div>
       </div>
     </div>
   </section>
@@ -309,13 +442,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </div>
       <div class="spec-scroll">
         <table class="specs">
-          <thead><tr><th>Equipo</th><th>Función</th><th>Detalles</th></tr></thead>
+          <thead><tr><th scope="col">Equipo</th><th scope="col">Función</th><th scope="col">Detalles</th></tr></thead>
           <tbody>
             <tr><td>NAS-01 · AS5404T</td><td>Servicios</td><td>4 bahías. Jellyfin, contenedores Docker y máquinas virtuales de laboratorio.</td></tr>
             <tr><td>NAS-02 · AS6806T</td><td>Almacenamiento y copias</td><td>6 bahías. Espacio de clientes y copias de seguridad cruzadas con NAS-01.</td></tr>
             <tr><td>Acceso remoto</td><td>Seguridad</td><td>Conexión cifrada (VPN/túnel). No se abren puertos del router a internet.</td></tr>
             <tr><td>Protección de datos</td><td>Fiabilidad</td><td>Volumen en RAID 5 (aguanta el fallo de un disco) y copias periódicas entre los dos NAS.</td></tr>
-            <tr><td>SAI</td><td>Energía</td><td>Sistema de alimentación ininterrumpida: aguanta cortes breves de luz y apaga los NAS de forma segura si el corte se alarga.</td></tr>
+            <tr><td>SAI</td><td>Energía</td><td>Alimentación ininterrumpida: aguanta cortes breves y apaga los NAS de forma segura si el corte se alarga.</td></tr>
           </tbody>
         </table>
       </div>
@@ -331,7 +464,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div>
         <p>Estudio 2º de Sistemas Microinformáticos y Redes (SMX). Lo que aprendo en clase lo pongo en práctica en casa: redes, Linux, virtualización, contenedores y copias de seguridad.</p>
         <p>Este proyecto es mi forma de dar un uso real a ese laboratorio. No soy una gran empresa: si algo falla, me escribes a mí y me ocupo yo.</p>
-        <div class="skills"><span>Linux</span><span>Docker</span><span>Redes</span><span>VirtualBox</span><span>VPN</span><span>RAID</span><span>Backups</span></div>
+        <div class="skills" role="list" aria-label="Tecnologías">
+          <span role="listitem">Linux</span>
+          <span role="listitem">Docker</span>
+          <span role="listitem">Redes</span>
+          <span role="listitem">VirtualBox</span>
+          <span role="listitem">VPN</span>
+          <span role="listitem">RAID</span>
+          <span role="listitem">Backups</span>
+          <span role="listitem">Nginx</span>
+          <span role="listitem">GitHub Actions</span>
+        </div>
       </div>
     </div>
   </section>
@@ -343,11 +486,30 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <h2>Antes de contratar</h2>
       </div>
       <div class="faq">
-        <details><summary>¿El contenido de Jellyfin lo pones tú?</summary><p>No. El servicio es el servidor: tú subes tu propio contenido, del que tienes derecho de uso (vídeos personales, música comprada, etc.). No vendo ni comparto películas ni series.</p></details>
-        <details><summary>¿Qué pasa si hay un corte de luz o de internet?</summary><p>Los NAS están conectados a un SAI (sistema de alimentación ininterrumpida) que los mantiene encendidos durante los cortes breves y los apaga de forma ordenada si el corte se alarga, para que no se dañen los discos. Además, tus datos están en RAID y con copias en el segundo NAS. Si lo que cae es internet, el servicio vuelve solo en cuanto se recupera la conexión. Te aviso de cualquier mantenimiento previsto.</p></details>
-        <details><summary>¿Mis archivos son privados?</summary><p>Sí. Cada cliente tiene su propio usuario y su carpeta. Nadie más tiene acceso a tu espacio.</p></details>
-        <details><summary>¿Hay permanencia?</summary><p>No. Pagas mes a mes y puedes darte de baja cuando quieras. Antes de cerrar la cuenta te dejo descargar todos tus datos.</p></details>
-        <details><summary>¿Cómo se paga?</summary><p>Por Bizum o transferencia, a principio de cada mes.</p></details>
+        <details>
+          <summary>¿El contenido de Jellyfin lo pones tú?</summary>
+          <p>No. El servicio es el servidor: tú subes tu propio contenido, del que tienes derecho de uso (vídeos personales, música comprada, etc.). No vendo ni comparto películas ni series.</p>
+        </details>
+        <details>
+          <summary>¿Qué pasa si hay un corte de luz o de internet?</summary>
+          <p>Los NAS están conectados a un SAI que los mantiene encendidos durante los cortes breves y los apaga de forma ordenada si el corte se alarga. Tus datos están en RAID y con copias en el segundo NAS. Si lo que cae es internet, el servicio vuelve solo cuando se recupera la conexión. Te aviso de cualquier mantenimiento previsto.</p>
+        </details>
+        <details>
+          <summary>¿Mis archivos son privados?</summary>
+          <p>Sí. Cada cliente tiene su propio usuario y carpeta. Nadie más tiene acceso a tu espacio, ni yo navego por él.</p>
+        </details>
+        <details>
+          <summary>¿Hay permanencia?</summary>
+          <p>No. Pagas mes a mes y puedes darte de baja cuando quieras. Antes de cerrar la cuenta te dejo descargar todos tus datos.</p>
+        </details>
+        <details>
+          <summary>¿Cómo se paga?</summary>
+          <p>Por Bizum o transferencia bancaria, a principio de cada mes. Te mando un resumen de lo que incluye tu servicio.</p>
+        </details>
+        <details>
+          <summary>¿Para cuántos jugadores es el servidor de Minecraft?</summary>
+          <p>Está pensado para grupos pequeños de hasta ~10 jugadores simultáneos. Si necesitas más capacidad, escríbeme y lo valoramos.</p>
+        </details>
       </div>
     </div>
   </section>
@@ -359,23 +521,44 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <p class="eyebrow" style="color:#9fb0a8">Contacto</p>
           <h2>¿Te interesa algún servicio?</h2>
           <p>Rellena el formulario indicando qué servicio quieres y cuántos usuarios o jugadores seréis. Te respondo por correo en menos de 24 horas.</p>
+          <p style="margin-top:14px;font-size:.9rem;color:#9fb0a8">También puedes escribirme directamente a <strong style="color:#cfd8d3">oscardavidsmx@gmail.com</strong></p>
         </div>
-        <form class="form" id="contact-form" novalidate>
-          <div class="field"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" autocomplete="name" required></div>
-          <div class="field"><label for="f-email">Tu correo</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
-          <div class="field"><label for="f-servicio">Servicio</label>
+        <form class="form" id="contact-form" novalidate aria-label="Formulario de contacto">
+          <div class="field">
+            <label for="f-nombre">Nombre <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-nombre" name="nombre" autocomplete="name" required aria-required="true" aria-describedby="err-nombre">
+            <span class="err-msg" id="err-nombre" role="alert">Escribe tu nombre</span>
+          </div>
+          <div class="field">
+            <label for="f-email">Tu correo <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required aria-required="true" aria-describedby="err-email">
+            <span class="err-msg" id="err-email" role="alert">Escribe un correo válido</span>
+          </div>
+          <div class="field">
+            <label for="f-servicio">Servicio</label>
             <select id="f-servicio" name="servicio">
               <option>Jellyfin · 5 €/mes</option>
               <option>Minecraft · 10 €/mes</option>
               <option>Almacenamiento básico 1 TB · 5 €/mes</option>
               <option>Almacenamiento plus 1 TB · 7 €/mes</option>
               <option>Otra consulta</option>
-            </select></div>
-          <div class="field"><label for="f-usuarios">Usuarios o jugadores</label><input id="f-usuarios" name="usuarios" type="number" min="1" max="50" value="1" inputmode="numeric"></div>
-          <div class="field full"><label for="f-mensaje">Mensaje</label><textarea id="f-mensaje" name="mensaje" required></textarea></div>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-usuarios">Usuarios o jugadores</label>
+            <input id="f-usuarios" name="usuarios" type="number" min="1" max="50" value="1" inputmode="numeric" aria-label="Número de usuarios o jugadores">
+          </div>
+          <div class="field full">
+            <label for="f-mensaje">Mensaje <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="f-mensaje" name="mensaje" required aria-required="true" aria-describedby="err-mensaje" placeholder="Cuéntame qué necesitas…"></textarea>
+            <span class="err-msg" id="err-mensaje" role="alert">Escribe tu mensaje</span>
+          </div>
           <div class="hp" aria-hidden="true"><label for="f-web">No rellenar</label><input id="f-web" name="_gotcha" tabindex="-1" autocomplete="off"></div>
-          <div class="send"><button type="submit" id="f-enviar">Enviar mensaje</button><span class="status" id="f-status" role="status" aria-live="polite"></span></div>
-          <p class="privacy">Solo uso tus datos para responder a tu consulta.</p>
+          <div class="send">
+            <button type="submit" id="f-enviar">Enviar mensaje</button>
+            <span class="status" id="f-status" role="status" aria-live="polite"></span>
+          </div>
+          <p class="privacy">Solo uso tus datos para responder a tu consulta. No comparto ningún dato con terceros.</p>
         </form>
       </div>
     </div>
@@ -384,17 +567,97 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Racó Hosting · Proyecto de Óscar, alumno de 2º SMX</span>
-    <span class="mono">Servido desde NAS-02</span>
+    <span>© 2026 Racó Hosting · Proyecto de Óscar, alumno de 2º SMX · Terrassa</span>
+    <div class="footer-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#contacto">Contacto</a>
+      <a href="https://github.com/Oskillar28/raco-hosting" rel="noopener" target="_blank">GitHub</a>
+    </div>
   </div>
 </footer>
 
-<script>
-/* Pega aquí la dirección de tu formulario de Formspree (https://formspree.io/f/xxxxxxx).
-   Tu correo real nunca aparece en esta página. */
-var FORM_ENDPOINT = "https://formspree.io/f/mqppnykl";
+<button class="back-top" id="back-top" aria-label="Volver al inicio" title="Volver arriba">↑</button>
 
-/* Contador de capacidad: lee capacidad.json (total_tb y alquilado_tb) */
+<script>
+/* ── Tema ─────────────────────────────────── */
+(function(){
+  var root=document.documentElement, btn=document.getElementById('theme-toggle');
+  function getStored(){try{return localStorage.getItem('rh-theme');}catch(e){return null;}}
+  function setStored(v){try{localStorage.setItem('rh-theme',v);}catch(e){}}
+  function apply(t){root.setAttribute('data-theme',t);setStored(t);}
+  var stored=getStored();
+  if(stored){apply(stored);}
+  btn.addEventListener('click',function(){
+    var current=root.getAttribute('data-theme');
+    if(!current){
+      var isDark=window.matchMedia('(prefers-color-scheme:dark)').matches;
+      apply(isDark?'light':'dark');
+    } else {
+      apply(current==='dark'?'light':'dark');
+    }
+  });
+})();
+
+/* ── Menú móvil ─────────────────────────── */
+(function(){
+  var toggle=document.getElementById('menu-toggle'), nav=document.getElementById('main-nav');
+  toggle.addEventListener('click',function(){
+    var open=nav.getAttribute('aria-expanded')==='true';
+    nav.setAttribute('aria-expanded', open?'false':'true');
+    toggle.setAttribute('aria-expanded', open?'false':'true');
+    toggle.textContent=open?'☰':'✕';
+  });
+  // Cerrar al hacer click en un enlace
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      nav.setAttribute('aria-expanded','false');
+      toggle.setAttribute('aria-expanded','false');
+      toggle.textContent='☰';
+    });
+  });
+  // Cerrar al hacer click fuera
+  document.addEventListener('click',function(e){
+    if(!nav.contains(e.target)&&!toggle.contains(e.target)){
+      nav.setAttribute('aria-expanded','false');
+      toggle.setAttribute('aria-expanded','false');
+      toggle.textContent='☰';
+    }
+  });
+})();
+
+/* ── Active nav link en scroll ───────────── */
+(function(){
+  var secs=['inicio','servicios','jellyfin','infraestructura','sobre-mi','faq','contacto'];
+  var links=document.querySelectorAll('nav a[href^="#"]');
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var id=e.target.id;
+        links.forEach(function(a){
+          a.classList.toggle('active', a.getAttribute('href')==='#'+id);
+        });
+      }
+    });
+  },{rootMargin:'-30% 0px -60% 0px'});
+  secs.forEach(function(id){
+    var el=document.getElementById(id);
+    if(el) obs.observe(el);
+  });
+})();
+
+/* ── Back to top ────────────────────────── */
+(function(){
+  var btn=document.getElementById('back-top');
+  window.addEventListener('scroll',function(){
+    btn.classList.toggle('visible', window.scrollY>400);
+  },{passive:true});
+  btn.addEventListener('click',function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+
+/* ── Contador de capacidad ──────────────── */
 (function(){
   function fmt(n){return (Math.round(n*100)/100).toLocaleString('es-ES');}
   function pintar(d){
@@ -405,29 +668,72 @@ var FORM_ENDPOINT = "https://formspree.io/f/mqppnykl";
     document.getElementById('cap-used').textContent=fmt(usado);
     document.getElementById('cap-used-bar').style.width=(usado/total*100)+'%';
     document.getElementById('cap-bar-label').setAttribute('aria-label',fmt(usado)+' TB alquilados de '+fmt(total)+' TB');
-    if(d.actualizado){document.getElementById('cap-date').textContent='Actualizado: '+new Date(d.actualizado).toLocaleDateString('es-ES');}
+    if(d.actualizado){document.getElementById('cap-date').textContent='Actualizado: '+new Date(d.actualizado+'T12:00:00').toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'});}
   }
   var RAW='https://raw.githubusercontent.com/Oskillar28/raco-hosting/main/docs/capacidad.json';
   function leer(u){return fetch(u+'?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json();});}
   leer(RAW).catch(function(){return leer('capacidad.json');}).then(pintar).catch(function(){});
 })();
 
+/* ── Formulario de contacto ─────────────── */
 (function(){
-  var f=document.getElementById('contact-form'),btn=document.getElementById('f-enviar'),st=document.getElementById('f-status');
-  function say(t,c){st.textContent=t;st.className='status'+(c?' '+c:'');}
+  var FORM_ENDPOINT='https://formspree.io/f/mqppnykl';
+  var f=document.getElementById('contact-form');
+  var btn=document.getElementById('f-enviar');
+  var st=document.getElementById('f-status');
+
+  function setStatus(t,c){st.textContent=t;st.className='status'+(c?' '+c:'');}
+
+  function validate(field, test, errId){
+    var ok=test(field.value);
+    field.classList.toggle('invalid',!ok);
+    document.getElementById(errId).style.display=ok?'none':'block';
+    return ok;
+  }
+
+  // Validación en tiempo real al perder el foco
+  f['nombre'].addEventListener('blur',function(){
+    validate(this, function(v){return v.trim().length>0;}, 'err-nombre');
+  });
+  f['email'].addEventListener('blur',function(){
+    validate(this, function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());}, 'err-email');
+  });
+  f['mensaje'].addEventListener('blur',function(){
+    validate(this, function(v){return v.trim().length>0;}, 'err-mensaje');
+  });
+
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    var nombre=f.nombre.value.trim(),email=f.email.value.trim(),msg=f.mensaje.value.trim();
-    if(!nombre||!msg){say('Escribe tu nombre y el mensaje.','err');return;}
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){say('Revisa tu correo: así no te puedo responder.','err');f.email.focus();return;}
-    if(f._gotcha.value){return;}
-    btn.disabled=true;say('Enviando…');
+    if(f._gotcha.value) return; // honeypot
+
+    var okNombre = validate(f['nombre'], function(v){return v.trim().length>0;}, 'err-nombre');
+    var okEmail  = validate(f['email'],  function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());}, 'err-email');
+    var okMsg    = validate(f['mensaje'],function(v){return v.trim().length>0;}, 'err-mensaje');
+
+    if(!okNombre||!okEmail||!okMsg){
+      setStatus('Corrige los campos marcados en rojo.','err');
+      var first=f.querySelector('.invalid');
+      if(first) first.focus();
+      return;
+    }
+
+    btn.disabled=true;
+    setStatus('Enviando…');
+
     var data=new FormData(f);
-    data.append('_subject','Racó Hosting · '+f.servicio.value+' · '+nombre);
+    data.append('_subject','Racó Hosting · '+f['servicio'].value+' · '+f['nombre'].value.trim());
+
     fetch(FORM_ENDPOINT,{method:'POST',body:data,headers:{'Accept':'application/json'}})
-      .then(function(r){if(!r.ok)throw new Error(r.status);f.reset();say('Mensaje enviado. Te respondo en menos de 24 horas.','ok');})
-      .catch(function(){say('No se ha podido enviar. Inténtalo de nuevo en unos minutos.','err');})
-      .then(function(){btn.disabled=false;});
+      .then(function(r){
+        if(!r.ok) throw new Error(r.status);
+        f.reset();
+        setStatus('✓ Mensaje enviado. Te respondo en menos de 24 horas.','ok');
+        btn.disabled=false;
+      })
+      .catch(function(){
+        setStatus('No se ha podido enviar. Inténtalo de nuevo en unos minutos o escríbeme directamente al correo.','err');
+        btn.disabled=false;
+      });
   });
 })();
 </script>
