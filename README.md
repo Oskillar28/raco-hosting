@@ -87,7 +87,7 @@ flowchart LR
 | Plan | Capacidad | Protección | Precio |
 |---|---:|---|---:|
 | **Básico** | 1 TB | RAID 5 (tolera el fallo de un disco) | **5 €/mes** |
-| **Plus** | 1 TB | RAID + copia en el segundo NAS | **7 €/mes** |
+| **Plus** | 1 TB | RAID 5 + copia en el segundo NAS | **7 €/mes** |
 
 - Carpeta privada con usuario y contraseña propios
 - Acceso por web, app o unidad de red
