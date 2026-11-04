@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Racó Hosting</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Racó Hosting: Jellyfin, servidores de Minecraft y almacenamiento en la nube privada de un alumno de 2º SMX.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,700;112,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: ficha técnica de un rack — cabecera con la "fachada" de los dos NAS, luego bahías = servicios */
+:root{
+  --bg:#eef0ee; --panel:#f8f9f7; --ink:#1b211f; --muted:#59625e; --line:#cfd5d1;
+  --chassis:#2a302d; --chassis-2:#3a413d; --led:#e08a00; --led-ok:#2e9e5b; --accent:#0f6b5c; --accent-ink:#ffffff;
+  --display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121614; --panel:#1a1f1d; --ink:#e6ebe8; --muted:#9aa5a0; --line:#2e3532;
+  --chassis:#0b0e0d; --chassis-2:#252b28; --led:#ffa726; --led-ok:#4cc77f; --accent:#4fbfa9; --accent-ink:#0b1311; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121614; --panel:#1a1f1d; --ink:#e6ebe8; --muted:#9aa5a0; --line:#2e3532;
+  --chassis:#0b0e0d; --chassis-2:#252b28; --led:#ffa726; --led-ok:#4cc77f; --accent:#4fbfa9; --accent-ink:#0b1311; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-stretch:112%;line-height:1.1;text-wrap:balance;margin:0}
+h2{font-size:clamp(1.6rem,3.5vw,2.3rem);font-weight:800}
+h3{font-size:1.25rem;font-weight:700}
+p{margin:0}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--led);outline-offset:3px;border-radius:4px}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.mono{font-family:var(--mono)}
+
+/* Cabecera */
+header.top{border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-stretch:112%;font-weight:800;font-size:1.25rem;color:var(--ink);text-decoration:none}
+.brand i{width:12px;height:12px;border-radius:50%;background:var(--led-ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--led-ok) 25%,transparent)}
+nav{display:flex;gap:18px;flex-wrap:wrap}
+nav a{color:var(--muted);text-decoration:none;font-size:.95rem}
+nav a:hover{color:var(--ink)}
+
+/* Hero */
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding-block:64px 56px}
+.hero h1{font-size:clamp(2.2rem,5.5vw,3.9rem);font-weight:800;margin-top:12px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lead{margin-top:18px;max-width:34em;color:var(--muted);font-size:1.1rem}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:6px;font-weight:700;text-decoration:none;border:2px solid var(--accent);font-family:var(--body);font-size:1rem;cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.hero > .wrap > div{min-width:0}
+
+/* Fachada NAS */
+.rack{display:grid;gap:14px}
+.nas{background:var(--chassis);border-radius:10px;padding:14px;color:#cfd8d3}
+.nas-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;margin-bottom:10px;color:#9fb0a8}
+.bays{display:grid;gap:6px}
+.bays.b4{grid-template-columns:repeat(4,1fr)}
+.bays.b6{grid-template-columns:repeat(6,1fr)}
+.bay{background:var(--chassis-2);border-radius:4px;height:64px;position:relative;border:1px solid #ffffff10}
+.bay::before{content:"";position:absolute;left:8px;right:8px;top:10px;height:2px;background:#ffffff14;box-shadow:0 8px 0 #ffffff14,0 16px 0 #ffffff14}
+.bay::after{content:"";position:absolute;left:8px;bottom:8px;width:7px;height:7px;border-radius:50%;background:var(--led-ok)}
+.bay.act::after{background:var(--led);animation:blink 1.1s steps(2) infinite}
+.bay.free{background:transparent;border:1px dashed #ffffff40}
+.bay.free::before{display:none}
+.bay.free::after{background:#ffffff30}
+.bay.free span{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--mono);font-size:.62rem;color:#ffffffa0;text-align:center}
+@keyframes blink{50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.bay.act::after{animation:none}}
+.rack-note{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+
+/* Secciones */
+section{padding-block:64px;border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:10px;margin-bottom:32px;max-width:44em}
+.sec-head p{color:var(--muted)}
+
+/* Servicios */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.plan{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:26px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.plan.feat{border:2px solid var(--accent)}
+.plan .tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between}
+.plan .tag b{color:var(--accent);font-weight:600}
+.price{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:2.6rem;line-height:1;font-variant-numeric:tabular-nums}
+.price small{font-family:var(--body);font-size:1rem;font-weight:400;color:var(--muted)}
+.plan ul{list-style:none;padding:0;margin:0;display:grid;gap:8px;font-size:.97rem}
+.plan li{padding-left:22px;position:relative}
+.plan li::before{content:"";position:absolute;left:2px;top:.62em;width:10px;height:2px;background:var(--accent)}
+.plan .what{color:var(--muted);font-size:.97rem}
+.plan .btn{margin-top:auto;justify-content:center}
+.tiers{display:grid;gap:8px;font-variant-numeric:tabular-nums}
+.tier{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--line);padding-bottom:6px;font-size:.95rem}
+.tier b{font-family:var(--mono)}
+
+/* Jellyfin explicado */
+.explain{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.explain > *{min-width:0}
+.explain p + p{margin-top:14px}
+.flow{display:grid;gap:10px}
+.step{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.step .n{font-family:var(--mono);font-weight:600;color:var(--accent);font-size:.9rem;padding-top:2px}
+.step p{font-size:.95rem;color:var(--muted)}
+.step b{color:var(--ink)}
+
+/* Infra */
+.specs{width:100%;border-collapse:collapse;font-size:.95rem}
+.spec-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.specs th,.specs td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+.specs tr:last-child td{border-bottom:0}
+.specs th{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap}
+.specs td:first-child{font-weight:700;white-space:nowrap}
+
+/* Sobre mí */
+.about{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px}
+.about > *{min-width:0}
+.about p + p{margin-top:14px}
+.skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.skills span{font-family:var(--mono);font-size:.8rem;border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--muted)}
+
+/* FAQ */
+.faq{display:grid;gap:10px;max-width:780px}
+details{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 18px}
+summary{cursor:pointer;font-weight:700}
+details p{margin-top:10px;color:var(--muted)}
+
+/* Contacto */
+.contact{background:var(--chassis);color:#e6ece9;border-radius:12px;padding:36px;display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+.contact > *{min-width:0}
+.contact h2{color:#fff}
+.contact p{color:#b7c4be;margin-top:10px}
+.contact{grid-template-columns:.9fr 1.1fr;align-items:start}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:grid;gap:6px;min-width:0}
+.field.full{grid-column:1 / -1}
+.field label{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:#9fb0a8}
+.field input,.field select,.field textarea{width:100%;font:inherit;font-size:1rem;color:#fff;background:#ffffff10;border:1px solid #ffffff30;border-radius:6px;padding:10px 12px;color-scheme:dark}
+.field textarea{min-height:110px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--led);outline-offset:1px;border-color:transparent}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.send{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.send button{background:var(--led);color:#1b1205;border:0;border-radius:6px;padding:12px 22px;font-weight:700;font-family:var(--body);font-size:1rem;cursor:pointer}
+.send button[disabled]{opacity:.6;cursor:wait}
+.status{font-size:.95rem;color:#b7c4be}
+.status.ok{color:var(--led-ok)}
+.status.err{color:#ffb4a8}
+.privacy{grid-column:1 / -1;font-size:.82rem;color:#9fb0a8}
+
+footer{padding-block:32px;color:var(--muted);font-size:.85rem}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media (max-width:860px){
+  .hero .wrap,.explain,.about,.contact{grid-template-columns:1fr}
+  .plans{grid-template-columns:1fr}
+  .hero .wrap{padding-block:40px}
+  section{padding-block:48px}
+  .contact{padding:24px}
+  nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio"><i aria-hidden="true"></i>Racó Hosting</a>
+    <nav aria-label="Secciones">
+      <a href="#servicios">Servicios</a>
+      <a href="#jellyfin">¿Qué es Jellyfin?</a>
+      <a href="#infraestructura">Infraestructura</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Nube privada · Terrassa (Barcelona)</p>
+        <h1>Tu streaming, tu servidor y tus archivos, en <em>hardware de verdad</em>.</h1>
+        <p class="lead">Soy Óscar, alumno de 2º de SMX. Gestiono dos NAS en casa y alquilo parte de su capacidad: servidores multimedia con Jellyfin, servidores de Minecraft para tu grupo y espacio de almacenamiento privado. Trato directo, precios cerrados y sin permanencia.</p>
+        <div class="cta">
+          <a class="btn primary" href="#servicios">Ver precios</a>
+          <a class="btn ghost" href="#contacto">Pedir información</a>
+        </div>
+      </div>
+      <div class="rack" aria-label="Los dos servidores NAS">
+        <div class="nas">
+          <div class="nas-head"><span>NAS-01 · ASUSTOR AS5404T</span><span>4 BAHÍAS</span></div>
+          <div class="bays b4"><div class="bay act"></div><div class="bay"></div><div class="bay act"></div><div class="bay"></div></div>
+        </div>
+        <div class="nas">
+          <div class="nas-head"><span>NAS-02 · ASUSTOR AS6806T</span><span>6 BAHÍAS</span></div>
+          <div class="bays b6"><div class="bay"></div><div class="bay act"></div><div class="bay"></div><div class="bay act"></div><div class="bay free"><span>1 TB<br>libre</span></div><div class="bay free"><span>1 TB<br>libre</span></div></div>
+        </div>
+        <p class="rack-note">● actividad &nbsp;● en línea &nbsp;◌ capacidad disponible para alquilar</p>
+      </div>
+    </div>
+  </div>
+
+  <section id="servicios">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Servicios y tarifas</p>
+        <h2>Tres servicios, precio mensual fijo</h2>
+        <p>Pagas mes a mes y lo dejas cuando quieras. Todos los precios son finales.</p>
+      </div>
+      <div class="plans">
+        <article class="plan">
+          <div class="tag"><span>Streaming</span><b>Jellyfin</b></div>
+          <div class="price">3 €<small> /mes</small></div>
+          <p class="what">Tu propio servidor multimedia privado: películas, series, música y fotos que tú subes, disponibles en cualquier pantalla.</p>
+          <ul>
+            <li>Cuenta personal en el servidor Jellyfin</li>
+            <li>Apps para Smart TV, Android, iPhone y navegador</li>
+            <li>Acceso desde fuera de casa por conexión cifrada</li>
+            <li>Sin anuncios y sin suscripción a terceros</li>
+          </ul>
+          <a class="btn ghost" href="#contacto">Contratar Jellyfin</a>
+        </article>
+        <article class="plan feat">
+          <div class="tag"><span>Juego</span><b>Minecraft</b></div>
+          <div class="price">10 €<small> /mes</small></div>
+          <p class="what">Un servidor de Minecraft solo para tu grupo de amigos, encendido 24/7 y sin depender del PC de nadie.</p>
+          <ul>
+            <li>Servidor Java Edition dedicado a tu grupo</li>
+            <li>Lista blanca: solo entran los jugadores que tú digas</li>
+            <li>Copia de seguridad diaria del mundo</li>
+            <li>Instalación de plugins o mods bajo petición</li>
+            <li>Pensado para grupos pequeños (hasta ~10 jugadores)</li>
+          </ul>
+          <a class="btn primary" href="#contacto">Contratar Minecraft</a>
+        </article>
+        <article class="plan">
+          <div class="tag"><span>Almacenamiento</span><b>1 TB</b></div>
+          <div class="price">5 €<small> /mes</small></div>
+          <p class="what">1 TB de espacio privado en mis NAS para guardar copias de seguridad, fotos o documentos.</p>
+          <div class="tiers">
+            <div class="tier"><span>Básico · 1 TB</span><b>5 €/mes</b></div>
+            <div class="tier"><span>Con copia en el 2.º NAS · 1 TB</span><b>7 €/mes</b></div>
+          </div>
+          <ul>
+            <li>Carpeta privada con usuario y contraseña propios</li>
+            <li>Acceso por web, app o unidad de red</li>
+            <li>Discos en RAID y servidores protegidos con SAI</li>
+          </ul>
+          <a class="btn ghost" href="#contacto">Contratar espacio</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="jellyfin">
+    <div class="wrap explain">
+      <div class="sec-head" style="margin:0">
+        <p class="eyebrow">Explicado sin tecnicismos</p>
+        <h2>¿Qué es Jellyfin y para qué sirve?</h2>
+        <p>Jellyfin es un programa libre y gratuito que convierte un servidor en tu propio "Netflix privado". Ordena tus películas, series y música, descarga las carátulas y sinopsis, recuerda por dónde te quedaste y lo reproduce en la tele, el móvil o el ordenador.</p>
+        <p>La diferencia con una plataforma de pago es que el contenido es tuyo: lo que subes no desaparece del catálogo y nadie analiza lo que ves. Yo me encargo de que el servidor esté encendido, actualizado y accesible.</p>
+      </div>
+      <div class="flow" aria-label="Cómo funciona">
+        <div class="step"><span class="n">01</span><p><b>Subes tu contenido.</b> Tus vídeos, música o fotos se guardan en tu carpeta del NAS.</p></div>
+        <div class="step"><span class="n">02</span><p><b>Jellyfin lo organiza.</b> Detecta títulos, añade portadas, idiomas y subtítulos.</p></div>
+        <div class="step"><span class="n">03</span><p><b>Lo ves donde quieras.</b> Entras con tu usuario desde la Smart TV, el móvil o el navegador.</p></div>
+        <div class="step"><span class="n">04</span><p><b>Sigue donde lo dejaste.</b> Empiezas en el salón y terminas en el móvil.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="infraestructura">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Dónde se ejecuta tu servicio</p>
+        <h2>Infraestructura</h2>
+        <p>Todo funciona en dos servidores NAS de ASUSTOR que administro yo mismo. Los servicios corren en contenedores Docker aislados entre sí.</p>
+      </div>
+      <div class="spec-scroll">
+        <table class="specs">
+          <thead><tr><th>Equipo</th><th>Función</th><th>Detalles</th></tr></thead>
+          <tbody>
+            <tr><td>NAS-01 · AS5404T</td><td>Servicios</td><td>4 bahías. Jellyfin, contenedores Docker y máquinas virtuales de laboratorio.</td></tr>
+            <tr><td>NAS-02 · AS6806T</td><td>Almacenamiento y copias</td><td>6 bahías. Espacio de clientes y copias de seguridad cruzadas con NAS-01.</td></tr>
+            <tr><td>Acceso remoto</td><td>Seguridad</td><td>Conexión cifrada (VPN/túnel). No se abren puertos del router a internet.</td></tr>
+            <tr><td>Protección de datos</td><td>Fiabilidad</td><td>Discos en RAID y copias periódicas entre los dos NAS.</td></tr>
+            <tr><td>SAI</td><td>Energía</td><td>Sistema de alimentación ininterrumpida: aguanta cortes breves de luz y apaga los NAS de forma segura si el corte se alarga.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre-mi">
+    <div class="wrap about">
+      <div class="sec-head" style="margin:0">
+        <p class="eyebrow">Quién hay detrás</p>
+        <h2>Un alumno de SMX con su propio laboratorio</h2>
+      </div>
+      <div>
+        <p>Estudio 2º de Sistemas Microinformáticos y Redes (SMX). Lo que aprendo en clase lo pongo en práctica en casa: redes, Linux, virtualización, contenedores y copias de seguridad.</p>
+        <p>Este proyecto es mi forma de dar un uso real a ese laboratorio. No soy una gran empresa: si algo falla, me escribes a mí y me ocupo yo.</p>
+        <div class="skills"><span>Linux</span><span>Docker</span><span>Redes</span><span>VirtualBox</span><span>VPN</span><span>RAID</span><span>Backups</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Preguntas frecuentes</p>
+        <h2>Antes de contratar</h2>
+      </div>
+      <div class="faq">
+        <details><summary>¿El contenido de Jellyfin lo pones tú?</summary><p>No. El servicio es el servidor: tú subes tu propio contenido, del que tienes derecho de uso (vídeos personales, música comprada, etc.). No vendo ni comparto películas ni series.</p></details>
+        <details><summary>¿Qué pasa si hay un corte de luz o de internet?</summary><p>Los NAS están conectados a un SAI (sistema de alimentación ininterrumpida) que los mantiene encendidos durante los cortes breves y los apaga de forma ordenada si el corte se alarga, para que no se dañen los discos. Además, tus datos están en RAID y con copias en el segundo NAS. Si lo que cae es internet, el servicio vuelve solo en cuanto se recupera la conexión. Te aviso de cualquier mantenimiento previsto.</p></details>
+        <details><summary>¿Mis archivos son privados?</summary><p>Sí. Cada cliente tiene su propio usuario y su carpeta. Nadie más tiene acceso a tu espacio.</p></details>
+        <details><summary>¿Hay permanencia?</summary><p>No. Pagas mes a mes y puedes darte de baja cuando quieras. Antes de cerrar la cuenta te dejo descargar todos tus datos.</p></details>
+        <details><summary>¿Cómo se paga?</summary><p>Por Bizum o transferencia, a principio de cada mes.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <p class="eyebrow" style="color:#9fb0a8">Contacto</p>
+          <h2>¿Te interesa algún servicio?</h2>
+          <p>Rellena el formulario indicando qué servicio quieres y cuántos usuarios o jugadores seréis. Te respondo por correo en menos de 24 horas.</p>
+        </div>
+        <form class="form" id="contact-form" novalidate>
+          <div class="field"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" autocomplete="name" required></div>
+          <div class="field"><label for="f-email">Tu correo</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+          <div class="field"><label for="f-servicio">Servicio</label>
+            <select id="f-servicio" name="servicio">
+              <option>Jellyfin · 3 €/mes</option>
+              <option>Minecraft · 10 €/mes</option>
+              <option>Almacenamiento básico 1 TB · 5 €/mes</option>
+              <option>Almacenamiento plus 1 TB · 7 €/mes</option>
+              <option>Otra consulta</option>
+            </select></div>
+          <div class="field"><label for="f-usuarios">Usuarios o jugadores</label><input id="f-usuarios" name="usuarios" type="number" min="1" max="50" value="1" inputmode="numeric"></div>
+          <div class="field full"><label for="f-mensaje">Mensaje</label><textarea id="f-mensaje" name="mensaje" required></textarea></div>
+          <div class="hp" aria-hidden="true"><label for="f-web">No rellenar</label><input id="f-web" name="_gotcha" tabindex="-1" autocomplete="off"></div>
+          <div class="send"><button type="submit" id="f-enviar">Enviar mensaje</button><span class="status" id="f-status" role="status" aria-live="polite"></span></div>
+          <p class="privacy">Solo uso tus datos para responder a tu consulta.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Racó Hosting · Proyecto de Óscar, alumno de 2º SMX</span>
+    <span class="mono">Servido desde NAS-02</span>
+  </div>
+</footer>
+
+<script>
+/* Pega aquí la dirección de tu formulario de Formspree (https://formspree.io/f/xxxxxxx).
+   Tu correo real nunca aparece en esta página. */
+var FORM_ENDPOINT = "https://formspree.io/f/TU_ID_DE_FORMULARIO";
+
+(function(){
+  var f=document.getElementById('contact-form'),btn=document.getElementById('f-enviar'),st=document.getElementById('f-status');
+  function say(t,c){st.textContent=t;st.className='status'+(c?' '+c:'');}
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var nombre=f.nombre.value.trim(),email=f.email.value.trim(),msg=f.mensaje.value.trim();
+    if(!nombre||!msg){say('Escribe tu nombre y el mensaje.','err');return;}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){say('Revisa tu correo: así no te puedo responder.','err');f.email.focus();return;}
+    if(f._gotcha.value){return;}
+    btn.disabled=true;say('Enviando…');
+    var data=new FormData(f);
+    data.append('_subject','Racó Hosting · '+f.servicio.value+' · '+nombre);
+    fetch(FORM_ENDPOINT,{method:'POST',body:data,headers:{'Accept':'application/json'}})
+      .then(function(r){if(!r.ok)throw new Error(r.status);f.reset();say('Mensaje enviado. Te respondo en menos de 24 horas.','ok');})
+      .catch(function(){say('No se ha podido enviar. Inténtalo de nuevo en unos minutos.','err');})
+      .then(function(){btn.disabled=false;});
+  });
+})();
+</script>
+</body>
+</html>
