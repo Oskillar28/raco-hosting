@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Racó Hosting — Private cloud in Terrassa</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Racó Hosting: Jellyfin streaming, Minecraft servers and private cloud storage. Hosted on real hardware in Terrassa (Barcelona, Spain). No long-term contract.">
+<meta name="keywords" content="jellyfin, minecraft server, private storage, private cloud, terrassa, nas, personal hosting">
+<meta name="author" content="Óscar Ramírez">
+<meta name="robots" content="index, follow">
+<link rel="alternate" hreflang="es" href="https://oskillar28.github.io/raco-hosting/">
+<link rel="alternate" hreflang="en" href="https://oskillar28.github.io/raco-hosting/en/">
+<link rel="alternate" hreflang="x-default" href="https://oskillar28.github.io/raco-hosting/">
+<link rel="canonical" href="https://oskillar28.github.io/raco-hosting/en/">
+<!-- Open Graph / Social -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://oskillar28.github.io/raco-hosting/en/">
+<meta property="og:title" content="Racó Hosting — Private cloud in Terrassa">
+<meta property="og:description" content="Jellyfin, Minecraft and private storage on real hardware. No long-term contract, personal service.">
+<meta property="og:image" content="https://oskillar28.github.io/raco-hosting/captura-web.jpg">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Racó Hosting — Private cloud in Terrassa">
+<meta name="twitter:description" content="Jellyfin, Minecraft and private storage on real hardware. No long-term contract, from €5/month.">
+<meta name="twitter:image" content="https://oskillar28.github.io/raco-hosting/captura-web.jpg">
+<!-- Schema.org LocalBusiness -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"LocalBusiness",
+  "name":"Racó Hosting",
+  "description":"Self-managed private cloud: Jellyfin, Minecraft servers and storage.",
+  "url":"https://oskillar28.github.io/raco-hosting/en/",
+  "addressLocality":"Terrassa",
+  "addressRegion":"Catalonia",
+  "addressCountry":"ES",
+  "priceRange":"€5–€10/month",
+  "contactType":"customer service"
+}
+</script>
+<!-- Fuentes -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,700;112,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: ficha técnica de un rack — cabecera, hero con dos NAS, luego secciones */
+:root{
+  --bg:#eef0ee; --panel:#f8f9f7; --ink:#1b211f; --muted:#59625e; --line:#cfd5d1;
+  --chassis:#2a302d; --chassis-2:#3a413d; --led:#e08a00; --led-ok:#2e9e5b;
+  --accent:#0f6b5c; --accent-ink:#ffffff; --accent-hover:#0a5247;
+  --danger:#c0392b;
+  --display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --radius:10px; --radius-sm:6px;
+  --shadow:0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.06);
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121614; --panel:#1a1f1d; --ink:#e6ebe8; --muted:#9aa5a0; --line:#2e3532;
+  --chassis:#0b0e0d; --chassis-2:#252b28; --led:#ffa726; --led-ok:#4cc77f;
+  --accent:#4fbfa9; --accent-ink:#0b1311; --accent-hover:#3dada0;
+  --danger:#e57373;
+  --shadow:0 1px 3px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121614; --panel:#1a1f1d; --ink:#e6ebe8; --muted:#9aa5a0; --line:#2e3532;
+  --chassis:#0b0e0d; --chassis-2:#252b28; --led:#ffa726; --led-ok:#4cc77f;
+  --accent:#4fbfa9; --accent-ink:#0b1311; --accent-hover:#3dada0;
+  --danger:#e57373;
+  --shadow:0 1px 3px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+  color-scheme:dark}
+
+*{box-sizing:border-box; margin:0}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;min-height:100vh}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-stretch:112%;line-height:1.1;text-wrap:balance}
+h2{font-size:clamp(1.6rem,3.5vw,2.3rem);font-weight:800}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0}
+a{color:var(--accent)}
+a:hover{color:var(--accent-hover)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--led);outline-offset:3px;border-radius:4px}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.mono{font-family:var(--mono)}
+
+/* ── Skip link ─────────────────── */
+.skip-link{position:absolute;left:-9999px;top:auto;z-index:999}
+.skip-link:focus{position:fixed;top:0;left:0;background:var(--accent);color:var(--accent-ink);padding:12px 20px;font-weight:700;border-radius:0 0 var(--radius-sm) 0}
+
+/* ── Cabecera ─────────────────── */
+header.top{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:200;background:var(--bg);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-stretch:112%;font-weight:800;font-size:1.25rem;color:var(--ink);text-decoration:none}
+.brand:hover{color:var(--accent)}
+.brand i{width:12px;height:12px;border-radius:50%;background:var(--led-ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--led-ok) 25%,transparent);flex-shrink:0}
+nav{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+nav a{color:var(--muted);text-decoration:none;font-size:.95rem;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:color .15s, border-color .15s}
+nav a:hover{color:var(--ink);border-color:var(--accent)}
+nav a.active{color:var(--accent);border-color:var(--accent)}
+.header-actions{display:flex;align-items:center;gap:10px}
+
+/* Theme toggle */
+.theme-toggle{background:transparent;border:1px solid var(--line);border-radius:var(--radius-sm);padding:7px 10px;cursor:pointer;color:var(--muted);font-size:1rem;line-height:1;transition:border-color .15s, color .15s;display:flex;align-items:center}
+.theme-toggle:hover{border-color:var(--accent);color:var(--ink)}
+.theme-toggle .icon-sun{display:none}
+.theme-toggle .icon-moon{display:block}
+[data-theme="dark"] .theme-toggle .icon-sun,
+.dark-mode .theme-toggle .icon-sun{display:block}
+[data-theme="dark"] .theme-toggle .icon-moon,
+.dark-mode .theme-toggle .icon-moon{display:none}
+
+/* Hamburguesa móvil */
+.menu-toggle{display:none;background:transparent;border:1px solid var(--line);border-radius:var(--radius-sm);padding:7px 10px;cursor:pointer;color:var(--muted);font-size:1.1rem;line-height:1;align-items:center}
+.menu-toggle:hover{border-color:var(--accent);color:var(--ink)}
+nav[aria-expanded="true"]{display:flex}
+@media(max-width:860px){
+  nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:flex-start;background:var(--panel);border-bottom:1px solid var(--line);padding:12px max(16px,env(safe-area-inset-left,0px));gap:4px;z-index:300;box-shadow:var(--shadow)}
+  nav[aria-expanded="true"]{display:flex}
+  nav a{padding:10px 0;width:100%;border-bottom:1px solid var(--line);font-size:1rem}
+  nav a:last-child{border-bottom:none}
+  .menu-toggle{display:flex}
+}
+
+/* ── Hero ─────────────────────── */
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding-block:64px 56px}
+.hero h1{font-size:clamp(2.2rem,5.5vw,3.9rem);font-weight:800;margin-top:12px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lead{margin-top:18px;max-width:34em;color:var(--muted);font-size:1.1rem}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:var(--radius-sm);font-weight:700;text-decoration:none;border:2px solid var(--accent);font-family:var(--body);font-size:1rem;cursor:pointer;transition:background .15s, color .15s, transform .1s;user-select:none;white-space:nowrap}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{background:var(--accent-hover);border-color:var(--accent-hover)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.ghost:hover{background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.btn:active{transform:scale(.97)}
+.hero>.wrap>div{min-width:0}
+
+/* NAS / Rack */
+.rack{display:grid;gap:14px}
+.nas{background:var(--chassis);border-radius:var(--radius);padding:14px;color:#cfd8d3;box-shadow:var(--shadow)}
+.nas-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;margin-bottom:10px;color:#9fb0a8}
+.bays{display:grid;gap:6px}
+.bays.b4{grid-template-columns:repeat(4,1fr)}
+.bays.b6{grid-template-columns:repeat(6,1fr)}
+.bay{background:var(--chassis-2);border-radius:4px;height:64px;position:relative;border:1px solid #ffffff10}
+.bay::before{content:"";position:absolute;left:8px;right:8px;top:10px;height:2px;background:#ffffff14;box-shadow:0 8px 0 #ffffff14,0 16px 0 #ffffff14}
+.bay::after{content:"";position:absolute;left:8px;bottom:8px;width:7px;height:7px;border-radius:50%;background:var(--led-ok)}
+.bay.act::after{background:var(--led);animation:blink 1.1s steps(2) infinite}
+.bay.free{background:transparent;border:1px dashed #ffffff40}
+.bay.free::before{display:none}
+.bay.free::after{background:#ffffff30}
+.bay.free span{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--mono);font-size:.62rem;color:#ffffffa0;text-align:center;line-height:1.3}
+@keyframes blink{50%{opacity:.25}}
+@media(prefers-reduced-motion:reduce){.bay.act::after{animation:none}}
+.rack-note{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+
+/* ── Secciones ──────────────── */
+section{padding-block:64px;border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:10px;margin-bottom:32px;max-width:44em}
+.sec-head p{color:var(--muted)}
+
+/* ── Contador de capacidad ─── */
+.capacity{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px 24px;margin-bottom:24px;display:grid;grid-template-columns:auto 1fr;gap:10px 28px;align-items:center;box-shadow:var(--shadow)}
+.capacity>*{min-width:0}
+.cap-num{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cap-num small{font-family:var(--body);font-weight:400;font-size:1rem;color:var(--muted)}
+.cap-bar{height:14px;border-radius:7px;background:color-mix(in srgb,var(--line) 70%,transparent);overflow:hidden;display:flex}
+.cap-bar span{display:block;height:100%;background:var(--led);transition:width .6s ease}
+@media(prefers-reduced-motion:reduce){.cap-bar span{transition:none}}
+.cap-legend{display:flex;flex-wrap:wrap;gap:6px 20px;font-family:var(--mono);font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums;margin-top:8px}
+.cap-legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.cap-legend .k-used{background:var(--led)}
+.cap-legend .k-free{background:color-mix(in srgb,var(--line) 70%,transparent);border:1px solid var(--line)}
+@media(max-width:600px){.capacity{grid-template-columns:1fr}}
+
+/* ── Planes ─────────────────── */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.plan{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px;display:flex;flex-direction:column;gap:16px;min-width:0;box-shadow:var(--shadow);transition:box-shadow .2s, transform .15s}
+.plan:hover{box-shadow:0 2px 8px rgba(0,0,0,.12),0 8px 32px rgba(0,0,0,.1);transform:translateY(-2px)}
+@media(prefers-reduced-motion:reduce){.plan:hover{transform:none}}
+.plan.feat{border:2px solid var(--accent)}
+.plan .tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between}
+.plan .tag b{color:var(--accent);font-weight:600}
+.price{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:2.6rem;line-height:1;font-variant-numeric:tabular-nums}
+.price small{font-family:var(--body);font-size:1rem;font-weight:400;color:var(--muted)}
+.plan ul{list-style:none;padding:0;display:grid;gap:8px;font-size:.97rem}
+.plan li{padding-left:22px;position:relative}
+.plan li::before{content:"";position:absolute;left:2px;top:.62em;width:10px;height:2px;background:var(--accent)}
+.plan .what{color:var(--muted);font-size:.97rem}
+.plan .btn{margin-top:auto;justify-content:center}
+.badge-pop{display:inline-block;background:var(--accent);color:var(--accent-ink);font-family:var(--mono);font-size:.7rem;font-weight:700;border-radius:999px;padding:2px 9px;vertical-align:middle;margin-left:6px;letter-spacing:.05em}
+.tiers{display:grid;gap:8px;font-variant-numeric:tabular-nums}
+.tier{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--line);padding-bottom:6px;font-size:.95rem}
+.tier b{font-family:var(--mono)}
+
+/* ── Jellyfin ─────────────── */
+.explain{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.explain>*{min-width:0}
+.explain p+p{margin-top:14px}
+.flow{display:grid;gap:10px}
+.step{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;box-shadow:var(--shadow)}
+.step .n{font-family:var(--mono);font-weight:600;color:var(--accent);font-size:.9rem;padding-top:2px}
+.step p{font-size:.95rem;color:var(--muted)}
+.step b{color:var(--ink)}
+
+/* ── Infraestructura ───────── */
+.spec-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);box-shadow:var(--shadow)}
+.specs{width:100%;border-collapse:collapse;font-size:.95rem}
+.specs th,.specs td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+.specs tr:last-child td{border-bottom:0}
+.specs th{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap}
+.specs td:first-child{font-weight:700;white-space:nowrap}
+
+/* ── Sobre mí ───────────────── */
+.about{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px}
+.about>*{min-width:0}
+.about p+p{margin-top:14px}
+.skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.skills span{font-family:var(--mono);font-size:.8rem;border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--muted)}
+
+/* ── FAQ ──────────────────── */
+.faq{display:grid;gap:10px;max-width:780px}
+details{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 18px;transition:box-shadow .15s}
+details[open]{box-shadow:var(--shadow)}
+summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"▾";font-size:.85rem;color:var(--muted);transition:transform .2s;flex-shrink:0}
+details[open] summary::after{transform:rotate(-180deg)}
+@media(prefers-reduced-motion:reduce){summary::after{transition:none}}
+details p{margin-top:10px;color:var(--muted)}
+
+/* ── Contacto ─────────────── */
+.contact{background:var(--chassis);color:#e6ece9;border-radius:12px;padding:36px;display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:start}
+.contact>*{min-width:0}
+.contact h2{color:#fff}
+.contact p{color:#b7c4be;margin-top:10px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:grid;gap:6px;min-width:0}
+.field.full{grid-column:1 / -1}
+.field label{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:#9fb0a8;display:flex;align-items:center;gap:6px}
+.field label .req{color:var(--led);font-size:.8em}
+.field input,.field select,.field textarea{width:100%;font:inherit;font-size:1rem;color:#fff;background:#ffffff10;border:1px solid #ffffff30;border-radius:var(--radius-sm);padding:10px 12px;color-scheme:dark;transition:border-color .15s, outline .15s}
+.field textarea{min-height:110px;resize:vertical}
+.field select option{background:#2a302d;color:#ffffff}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--led);outline-offset:1px;border-color:transparent}
+.field input.invalid,.field textarea.invalid{border-color:var(--danger) !important}
+.field .err-msg{font-family:var(--mono);font-size:.75rem;color:#ffb4a8;display:none;margin-top:4px}
+.field input.invalid ~ .err-msg,
+.field textarea.invalid ~ .err-msg{display:block}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.send{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.send button{background:var(--led);color:#1b1205;border:0;border-radius:var(--radius-sm);padding:12px 22px;font-weight:700;font-family:var(--body);font-size:1rem;cursor:pointer;transition:opacity .15s, transform .1s}
+.send button:hover{opacity:.9}
+.send button:active{transform:scale(.97)}
+.send button[disabled]{opacity:.6;cursor:wait}
+.status{font-size:.95rem;color:#b7c4be}
+.status.ok{color:var(--led-ok)}
+.status.err{color:#ffb4a8}
+.privacy{grid-column:1 / -1;font-size:.82rem;color:#9fb0a8}
+
+/* ── Footer ─────────────────── */
+footer{padding-block:32px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+.footer-links{display:flex;gap:16px;flex-wrap:wrap}
+.footer-links a{color:var(--muted);text-decoration:none;font-size:.85rem}
+.footer-links a:hover{color:var(--accent)}
+
+/* ── Back to top ─────────────── */
+.back-top{position:fixed;bottom:max(24px,env(safe-area-inset-bottom,0px));right:max(24px,env(safe-area-inset-right,0px));background:var(--accent);color:var(--accent-ink);border:none;border-radius:50%;width:44px;height:44px;font-size:1.2rem;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:100;transition:opacity .2s, transform .15s}
+.back-top.visible{display:flex}
+.back-top:hover{transform:translateY(-2px)}
+@media(prefers-reduced-motion:reduce){.back-top:hover{transform:none}}
+
+/* ── Responsive ──────────────── */
+@media(max-width:860px){
+  .hero .wrap,.explain,.about,.contact{grid-template-columns:1fr}
+  .plans{grid-template-columns:1fr}
+  .hero .wrap{padding-block:40px}
+  section{padding-block:48px}
+  .contact{padding:24px}
+}
+@media(max-width:600px){
+  .form{grid-template-columns:1fr}
+  .field.full,.send,.privacy{grid-column:1}
+}
+
+/* Selector de idioma / Language switcher */
+.lang{display:flex;align-items:center;gap:2px;font-family:var(--mono);font-size:.78rem;border:1px solid var(--line);border-radius:999px;padding:2px;flex-shrink:0}
+.lang a,.lang span{padding:4px 10px;border-radius:999px;text-decoration:none;letter-spacing:.06em;line-height:1.4}
+.lang a{color:var(--muted)}
+.lang a:hover{color:var(--ink)}
+.lang [aria-current]{background:var(--accent);color:var(--accent-ink);font-weight:600}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Racó Hosting — home"><i aria-hidden="true"></i>Racó Hosting</a>
+    <div class="header-actions">
+      <button class="menu-toggle" id="menu-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Open menu">☰</button>
+      <nav id="main-nav" aria-label="Sections" aria-expanded="false">
+        <a href="#servicios">Services</a>
+        <a href="#jellyfin">What is Jellyfin?</a>
+        <a href="#infraestructura">Infrastructure</a>
+        <a href="#sobre-mi">About me</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacto">Contact</a>
+      </nav>
+      <div class="lang" aria-label="Language"><a href="../" hreflang="es" lang="es">ES</a><span aria-current="true">EN</span></div>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <span class="icon-moon" aria-hidden="true">🌙</span>
+        <span class="icon-sun" aria-hidden="true">☀️</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="hero" id="inicio">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Private cloud · Terrassa (Barcelona, Spain)</p>
+        <h1>Your streaming, your server and your files, on <em>real hardware</em>.</h1>
+        <p class="lead">I'm Óscar, a second-year IT student (SMX, Spain's vocational diploma in computer systems and networks). I run two NAS servers at home and rent out part of their capacity: Jellyfin media servers, Minecraft servers for your group and private storage space. Personal service, fixed prices and no long-term contract.</p>
+        <div class="cta">
+          <a class="btn primary" href="#servicios">See pricing</a>
+          <a class="btn ghost" href="#contacto">Get in touch</a>
+        </div>
+      </div>
+      <div class="rack" aria-label="The two Racó Hosting NAS servers" role="img">
+        <div class="nas">
+          <div class="nas-head"><span>NAS-01 · ASUSTOR AS5404T</span><span>4 BAYS</span></div>
+          <div class="bays b4" aria-hidden="true">
+            <div class="bay act"></div><div class="bay"></div><div class="bay act"></div><div class="bay"></div>
+          </div>
+        </div>
+        <div class="nas">
+          <div class="nas-head"><span>NAS-02 · ASUSTOR AS6806T</span><span>6 BAYS</span></div>
+          <div class="bays b6" aria-hidden="true">
+            <div class="bay"></div><div class="bay act"></div><div class="bay"></div>
+            <div class="bay act"></div>
+            <div class="bay free"><span>1 TB<br>free</span></div>
+            <div class="bay free"><span>1 TB<br>free</span></div>
+          </div>
+        </div>
+        <p class="rack-note" aria-hidden="true">● activity &nbsp;● online &nbsp;◌ capacity available to rent</p>
+      </div>
+    </div>
+  </div>
+
+  <section id="servicios">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Services and pricing</p>
+        <h2>Three services, one fixed monthly price</h2>
+        <p>Pay month by month and cancel whenever you like. All prices are final.</p>
+      </div>
+
+      <div class="capacity" id="capacidad" aria-live="polite" aria-label="Available storage capacity">
+        <div>
+          <p class="eyebrow">Storage available to rent</p>
+          <div class="cap-num"><span id="cap-free">80</span> TB<small> of <span id="cap-total">80</span> TB</small></div>
+        </div>
+        <div>
+          <div class="cap-bar" role="img" id="cap-bar-label" aria-label="0 TB rented out of 80 TB">
+            <span id="cap-used-bar" style="width:0%"></span>
+          </div>
+          <div class="cap-legend">
+            <span><i class="k-used" aria-hidden="true"></i>Rented: <b id="cap-used">0</b> TB</span>
+            <span><i class="k-free" aria-hidden="true"></i>Free: <b id="cap-free2">80</b> TB</span>
+            <span id="cap-date"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="plans" role="list">
+        <article class="plan" role="listitem">
+          <div class="tag"><span>Streaming</span><b>Jellyfin</b></div>
+          <div class="price">€5<small> /month</small></div>
+          <p class="what">Your own private media server: the films, series, music and photos you upload, available on any screen.</p>
+          <ul>
+            <li>Personal account on the Jellyfin server</li>
+            <li>Apps for Smart TV, Android, iPhone and web browser</li>
+            <li>Remote access over an encrypted connection</li>
+            <li>No ads and no third-party subscriptions</li>
+          </ul>
+          <a class="btn ghost" href="#contacto" aria-label="Order Jellyfin for 5 euros a month">Order Jellyfin</a>
+        </article>
+
+        <article class="plan feat" role="listitem">
+          <div class="tag"><span>Gaming</span><b>Minecraft <span class="badge-pop">Popular</span></b></div>
+          <div class="price">€10<small> /month</small></div>
+          <p class="what">A Minecraft server just for your group of friends, online 24/7 and not tied to anyone's PC.</p>
+          <ul>
+            <li>Dedicated Java Edition server for your group</li>
+            <li>Whitelist: only the players you choose can join</li>
+            <li>Daily world backup</li>
+            <li>Plugins or mods installed on request</li>
+            <li>Designed for small groups (up to ~10 players)</li>
+          </ul>
+          <a class="btn primary" href="#contacto" aria-label="Order a Minecraft server for 10 euros a month">Order Minecraft</a>
+        </article>
+
+        <article class="plan" role="listitem">
+          <div class="tag"><span>Storage</span><b>From 1 TB</b></div>
+          <div class="price">€5<small> /month</small></div>
+          <p class="what">Private space on my NAS servers for backups, photos or documents.</p>
+          <div class="tiers">
+            <div class="tier"><span>Basic · 1 TB</span><b>€5/month</b></div>
+            <div class="tier"><span>Plus · 1 TB + copy on 2nd NAS</span><b>€7/month</b></div>
+          </div>
+          <ul>
+            <li>Private folder with your own username and password</li>
+            <li>Access via web, app or network drive</li>
+            <li>RAID-protected disks and servers on a UPS</li>
+          </ul>
+          <a class="btn ghost" href="#contacto" aria-label="Order storage from 5 euros a month">Order storage</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="jellyfin">
+    <div class="wrap explain">
+      <div class="sec-head" style="margin:0">
+        <p class="eyebrow">In plain words</p>
+        <h2>What is Jellyfin and what is it for?</h2>
+        <p>Jellyfin is free, open-source software that turns a server into your own private "Netflix". It organises your films, series and music, fetches cover art and synopses, remembers where you left off and plays everything on your TV, phone or computer.</p>
+        <p>Unlike a paid platform, the content is yours: nothing you upload disappears from the catalogue and nobody tracks what you watch. I make sure the server stays on, up to date and reachable.</p>
+      </div>
+      <div class="flow" aria-label="How Jellyfin works">
+        <div class="step"><span class="n" aria-hidden="true">01</span><p><b>Upload your content.</b> Your videos, music or photos are stored in your folder on the NAS.</p></div>
+        <div class="step"><span class="n" aria-hidden="true">02</span><p><b>Jellyfin organises it.</b> It detects titles and adds artwork, languages and subtitles.</p></div>
+        <div class="step"><span class="n" aria-hidden="true">03</span><p><b>Watch it anywhere.</b> Sign in with your account on your Smart TV, phone or browser.</p></div>
+        <div class="step"><span class="n" aria-hidden="true">04</span><p><b>Pick up where you left off.</b> Start in the living room, finish on your phone.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="infraestructura">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Where your service runs</p>
+        <h2>Infrastructure</h2>
+        <p>Everything runs on two ASUSTOR NAS servers that I manage myself. Services run in Docker containers isolated from each other.</p>
+      </div>
+      <div class="spec-scroll">
+        <table class="specs">
+          <thead><tr><th scope="col">Device</th><th scope="col">Role</th><th scope="col">Details</th></tr></thead>
+          <tbody>
+            <tr><td>NAS-01 · AS5404T</td><td>Services</td><td>4 bays. Jellyfin, Docker containers and lab virtual machines.</td></tr>
+            <tr><td>NAS-02 · AS6806T</td><td>Storage and backups</td><td>6 bays. Customer storage and cross-backups with NAS-01.</td></tr>
+            <tr><td>Remote access</td><td>Security</td><td>Encrypted connection (VPN/tunnel). No router ports are opened to the internet.</td></tr>
+            <tr><td>Data protection</td><td>Reliability</td><td>RAID 5 volume (survives a single disk failure) and regular backups between both NAS servers.</td></tr>
+            <tr><td>UPS</td><td>Power</td><td>Uninterruptible power supply: rides out short power cuts and shuts the NAS servers down safely if an outage lasts longer.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre-mi">
+    <div class="wrap about">
+      <div class="sec-head" style="margin:0">
+        <p class="eyebrow">Who's behind it</p>
+        <h2>An IT student with his own home lab</h2>
+      </div>
+      <div>
+        <p>I'm in the second year of SMX (Sistemas Microinformáticos y Redes), a Spanish vocational diploma in computer systems and networks. What I learn in class I put into practice at home: networking, Linux, virtualisation, containers and backups.</p>
+        <p>This project is my way of putting that lab to real use. I'm not a big company: if something goes wrong, you write to me and I sort it out myself.</p>
+        <div class="skills" role="list" aria-label="Technologies">
+          <span role="listitem">Linux</span>
+          <span role="listitem">Docker</span>
+          <span role="listitem">Networking</span>
+          <span role="listitem">VirtualBox</span>
+          <span role="listitem">VPN</span>
+          <span role="listitem">RAID</span>
+          <span role="listitem">Backups</span>
+          <span role="listitem">Nginx</span>
+          <span role="listitem">GitHub Actions</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Frequently asked questions</p>
+        <h2>Before you order</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Do you provide the content on Jellyfin?</summary>
+          <p>No. The service is the server: you upload your own content that you have the right to use (personal videos, music you've bought, etc.). I don't sell or share films or series.</p>
+        </details>
+        <details>
+          <summary>What happens if there's a power or internet outage?</summary>
+          <p>The NAS servers are connected to a UPS that keeps them running during short power cuts and shuts them down cleanly if the outage lasts longer. Your data is on RAID and backed up to the second NAS. If the internet goes down, the service comes back on its own once the connection is restored. I'll let you know about any planned maintenance.</p>
+        </details>
+        <details>
+          <summary>Are my files private?</summary>
+          <p>Yes. Each customer has their own user account and folder. Nobody else can access your space, and I don't browse it either.</p>
+        </details>
+        <details>
+          <summary>Is there a minimum contract?</summary>
+          <p>No. You pay month by month and can cancel whenever you want. Before closing your account, I'll let you download all your data.</p>
+        </details>
+        <details>
+          <summary>How do I pay?</summary>
+          <p>By Bizum or bank transfer, at the start of each month. I'll send you a summary of what your service includes.</p>
+        </details>
+        <details>
+          <summary>How many players can the Minecraft server handle?</summary>
+          <p>It's designed for small groups of up to ~10 players at the same time. If you need more capacity, get in touch and we'll look into it.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <p class="eyebrow" style="color:#9fb0a8">Contact</p>
+          <h2>Interested in a service?</h2>
+          <p>Fill in the form telling me which service you want and how many users or players you'll be. I'll reply by email within 24 hours.</p>
+          <p style="margin-top:14px;font-size:.9rem;color:#9fb0a8">You can also email me directly at <strong style="color:#cfd8d3">oscardavidsmx@gmail.com</strong></p>
+        </div>
+        <form class="form" id="contact-form" novalidate aria-label="Contact form">
+          <div class="field">
+            <label for="f-nombre">Name <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-nombre" name="nombre" autocomplete="name" required aria-required="true" aria-describedby="err-nombre">
+            <span class="err-msg" id="err-nombre" role="alert">Please enter your name</span>
+          </div>
+          <div class="field">
+            <label for="f-email">Your email <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required aria-required="true" aria-describedby="err-email">
+            <span class="err-msg" id="err-email" role="alert">Please enter a valid email address</span>
+          </div>
+          <div class="field">
+            <label for="f-servicio">Service</label>
+            <select id="f-servicio" name="servicio">
+              <option>Jellyfin · €5/month</option>
+              <option>Minecraft · €10/month</option>
+              <option>Basic storage 1 TB · €5/month</option>
+              <option>Plus storage 1 TB · €7/month</option>
+              <option>Other enquiry</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-usuarios">Users or players</label>
+            <input id="f-usuarios" name="usuarios" type="number" min="1" max="50" value="1" inputmode="numeric" aria-label="Number of users or players">
+          </div>
+          <div class="field full">
+            <label for="f-mensaje">Message <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="f-mensaje" name="mensaje" required aria-required="true" aria-describedby="err-mensaje" placeholder="Tell me what you need…"></textarea>
+            <span class="err-msg" id="err-mensaje" role="alert">Please enter your message</span>
+          </div>
+          <div class="hp" aria-hidden="true"><label for="f-web">Leave empty</label><input id="f-web" name="_gotcha" tabindex="-1" autocomplete="off"></div>
+          <div class="send">
+            <input type="hidden" name="idioma" value="English">
+            <button type="submit" id="f-enviar">Send message</button>
+            <span class="status" id="f-status" role="status" aria-live="polite"></span>
+          </div>
+          <p class="privacy">I only use your details to reply to your enquiry. I never share any data with third parties.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Racó Hosting · A project by Óscar, second-year SMX student · Terrassa</span>
+    <div class="footer-links">
+      <a href="#inicio">Home</a>
+      <a href="#servicios">Services</a>
+      <a href="#contacto">Contact</a>
+      <a href="https://github.com/Oskillar28/raco-hosting" rel="noopener" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" id="back-top" aria-label="Back to top" title="Back to top">↑</button>
+
+<script>
+/* ── Tema ─────────────────────────────────── */
+(function(){
+  var root=document.documentElement, btn=document.getElementById('theme-toggle');
+  function getStored(){try{return localStorage.getItem('rh-theme');}catch(e){return null;}}
+  function setStored(v){try{localStorage.setItem('rh-theme',v);}catch(e){}}
+  function apply(t){root.setAttribute('data-theme',t);setStored(t);}
+  var stored=getStored();
+  if(stored){apply(stored);}
+  btn.addEventListener('click',function(){
+    var current=root.getAttribute('data-theme');
+    if(!current){
+      var isDark=window.matchMedia('(prefers-color-scheme:dark)').matches;
+      apply(isDark?'light':'dark');
+    } else {
+      apply(current==='dark'?'light':'dark');
+    }
+  });
+})();
+
+/* ── Menú móvil ─────────────────────────── */
+(function(){
+  var toggle=document.getElementById('menu-toggle'), nav=document.getElementById('main-nav');
+  toggle.addEventListener('click',function(){
+    var open=nav.getAttribute('aria-expanded')==='true';
+    nav.setAttribute('aria-expanded', open?'false':'true');
+    toggle.setAttribute('aria-expanded', open?'false':'true');
+    toggle.textContent=open?'☰':'✕';
+  });
+  // Cerrar al hacer click en un enlace
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      nav.setAttribute('aria-expanded','false');
+      toggle.setAttribute('aria-expanded','false');
+      toggle.textContent='☰';
+    });
+  });
+  // Cerrar al hacer click fuera
+  document.addEventListener('click',function(e){
+    if(!nav.contains(e.target)&&!toggle.contains(e.target)){
+      nav.setAttribute('aria-expanded','false');
+      toggle.setAttribute('aria-expanded','false');
+      toggle.textContent='☰';
+    }
+  });
+})();
+
+/* ── Active nav link en scroll ───────────── */
+(function(){
+  var secs=['inicio','servicios','jellyfin','infraestructura','sobre-mi','faq','contacto'];
+  var links=document.querySelectorAll('nav a[href^="#"]');
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var id=e.target.id;
+        links.forEach(function(a){
+          a.classList.toggle('active', a.getAttribute('href')==='#'+id);
+        });
+      }
+    });
+  },{rootMargin:'-30% 0px -60% 0px'});
+  secs.forEach(function(id){
+    var el=document.getElementById(id);
+    if(el) obs.observe(el);
+  });
+})();
+
+/* ── Back to top ────────────────────────── */
+(function(){
+  var btn=document.getElementById('back-top');
+  window.addEventListener('scroll',function(){
+    btn.classList.toggle('visible', window.scrollY>400);
+  },{passive:true});
+  btn.addEventListener('click',function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+
+/* ── Contador de capacidad ──────────────── */
+(function(){
+  function fmt(n){return (Math.round(n*100)/100).toLocaleString('en-GB');}
+  function pintar(d){
+    var total=Number(d.total_tb)||80, usado=Math.min(Math.max(Number(d.alquilado_tb)||0,0),total), libre=total-usado;
+    document.getElementById('cap-total').textContent=fmt(total);
+    document.getElementById('cap-free').textContent=fmt(libre);
+    document.getElementById('cap-free2').textContent=fmt(libre);
+    document.getElementById('cap-used').textContent=fmt(usado);
+    document.getElementById('cap-used-bar').style.width=(usado/total*100)+'%';
+    document.getElementById('cap-bar-label').setAttribute('aria-label',fmt(usado)+' TB rented out of '+fmt(total)+' TB');
+    if(d.actualizado){document.getElementById('cap-date').textContent='Updated: '+new Date(d.actualizado+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});}
+  }
+  var RAW='https://raw.githubusercontent.com/Oskillar28/raco-hosting/main/docs/capacidad.json';
+  function leer(u){return fetch(u+'?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json();});}
+  leer(RAW).catch(function(){return leer('../capacidad.json');}).then(pintar).catch(function(){});
+})();
+
+/* ── Formulario de contacto ─────────────── */
+(function(){
+  var FORM_ENDPOINT='https://formspree.io/f/mqppnykl';
+  var f=document.getElementById('contact-form');
+  var btn=document.getElementById('f-enviar');
+  var st=document.getElementById('f-status');
+
+  function setStatus(t,c){st.textContent=t;st.className='status'+(c?' '+c:'');}
+
+  function validate(field, test, errId){
+    var ok=test(field.value);
+    field.classList.toggle('invalid',!ok);
+    document.getElementById(errId).style.display=ok?'none':'block';
+    return ok;
+  }
+
+  // Validación en tiempo real al perder el foco
+  f['nombre'].addEventListener('blur',function(){
+    validate(this, function(v){return v.trim().length>0;}, 'err-nombre');
+  });
+  f['email'].addEventListener('blur',function(){
+    validate(this, function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());}, 'err-email');
+  });
+  f['mensaje'].addEventListener('blur',function(){
+    validate(this, function(v){return v.trim().length>0;}, 'err-mensaje');
+  });
+
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(f._gotcha.value) return; // honeypot
+
+    var okNombre = validate(f['nombre'], function(v){return v.trim().length>0;}, 'err-nombre');
+    var okEmail  = validate(f['email'],  function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());}, 'err-email');
+    var okMsg    = validate(f['mensaje'],function(v){return v.trim().length>0;}, 'err-mensaje');
+
+    if(!okNombre||!okEmail||!okMsg){
+      setStatus('Please fix the fields marked in red.','err');
+      var first=f.querySelector('.invalid');
+      if(first) first.focus();
+      return;
+    }
+
+    btn.disabled=true;
+    setStatus('Sending…');
+
+    var data=new FormData(f);
+    data.append('_subject','Racó Hosting (EN) · '+f['servicio'].value+' · '+f['nombre'].value.trim());
+
+    fetch(FORM_ENDPOINT,{method:'POST',body:data,headers:{'Accept':'application/json'}})
+      .then(function(r){
+        if(!r.ok) throw new Error(r.status);
+        f.reset();
+        setStatus('✓ Message sent. I\'ll reply within 24 hours.','ok');
+        btn.disabled=false;
+      })
+      .catch(function(){
+        setStatus('Your message couldn\'t be sent. Please try again in a few minutes or email me directly.','err');
+        btn.disabled=false;
+      });
+  });
+})();
+</script>
+</body>
+</html>

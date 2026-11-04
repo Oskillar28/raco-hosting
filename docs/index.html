@@ -9,6 +9,9 @@
 <meta name="keywords" content="jellyfin, minecraft servidor, almacenamiento privado, nube privada, terrassa, nas, hosting personal">
 <meta name="author" content="Óscar Ramírez">
 <meta name="robots" content="index, follow">
+<link rel="alternate" hreflang="es" href="https://oskillar28.github.io/raco-hosting/">
+<link rel="alternate" hreflang="en" href="https://oskillar28.github.io/raco-hosting/en/">
+<link rel="alternate" hreflang="x-default" href="https://oskillar28.github.io/raco-hosting/">
 <link rel="canonical" href="https://oskillar28.github.io/raco-hosting/">
 <!-- Open Graph / Social -->
 <meta property="og:type" content="website">
@@ -284,6 +287,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
   .form{grid-template-columns:1fr}
   .field.full,.send,.privacy{grid-column:1}
 }
+
+/* Selector de idioma / Language switcher */
+.lang{display:flex;align-items:center;gap:2px;font-family:var(--mono);font-size:.78rem;border:1px solid var(--line);border-radius:999px;padding:2px;flex-shrink:0}
+.lang a,.lang span{padding:4px 10px;border-radius:999px;text-decoration:none;letter-spacing:.06em;line-height:1.4}
+.lang a{color:var(--muted)}
+.lang a:hover{color:var(--ink)}
+.lang [aria-current]{background:var(--accent);color:var(--accent-ink);font-weight:600}
 </style>
 </head>
 <body>
@@ -303,6 +313,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
         <a href="#faq">FAQ</a>
         <a href="#contacto">Contacto</a>
       </nav>
+      <div class="lang" aria-label="Idioma"><span aria-current="true">ES</span><a href="en/" hreflang="en" lang="en">EN</a></div>
       <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
         <span class="icon-moon" aria-hidden="true">🌙</span>
         <span class="icon-sun" aria-hidden="true">☀️</span>

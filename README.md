@@ -6,6 +6,8 @@
 
 Proyecto de **Óscar**, alumno de **2º de SMX** (Sistemas Microinformáticos y Redes)
 
+**🇪🇸 Español** · [🇬🇧 English](README.en.md)
+
 ![Estado](https://img.shields.io/badge/estado-en%20servicio-2e9e5b?style=for-the-badge)
 ![NAS](https://img.shields.io/badge/servidores-2%20NAS%20ASUSTOR-0f6b5c?style=for-the-badge)
 ![Docker](https://img.shields.io/badge/Docker-contenedores-2496ED?style=for-the-badge&logo=docker&logoColor=white)
@@ -138,7 +140,7 @@ flowchart TB
 
 [![Web de Racó Hosting](docs/captura-web.jpg)](https://oskillar28.github.io/raco-hosting/)
 
-**https://oskillar28.github.io/raco-hosting/**
+**https://oskillar28.github.io/raco-hosting/** · Versión en inglés: **https://oskillar28.github.io/raco-hosting/en/**
 
 ## 🐳 Desplegar con Docker
 
@@ -148,7 +150,7 @@ La web también se publica como imagen Docker en **GitHub Packages**, lista para
 docker run -d -p 8080:80 --name raco-web --restart unless-stopped ghcr.io/oskillar28/raco-hosting:latest
 ```
 
-Después se abre en `http://IP-DEL-NAS:8080`. Para actualizarla:
+Después se abre en `http://IP-DEL-NAS:8080` (castellano) o `http://IP-DEL-NAS:8080/en/` (inglés). Para actualizarla:
 
 ```bash
 docker pull ghcr.io/oskillar28/raco-hosting:latest && docker rm -f raco-web && docker run -d -p 8080:80 --name raco-web --restart unless-stopped ghcr.io/oskillar28/raco-hosting:latest
