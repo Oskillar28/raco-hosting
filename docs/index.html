@@ -206,8 +206,8 @@ section{padding-block:64px;border-top:1px solid var(--line)}
 .sizes b,.sizes .p{font-family:var(--mono);text-align:right;white-space:nowrap}
 .sizes .p{color:var(--muted)}
 .sizes .best{color:var(--accent);font-family:var(--mono);font-size:.7rem;margin-left:6px}
-.check{display:flex;align-items:center;gap:10px;font-size:.95rem;color:#cfd8d3;cursor:pointer}
-.check input{width:18px;height:18px;accent-color:var(--led);flex-shrink:0}
+.field label.check{display:flex;align-items:center;gap:12px;font-family:var(--body);font-size:.95rem;letter-spacing:0;text-transform:none;color:#e6ece9;cursor:pointer;line-height:1.4;padding:12px 14px;border:1px solid #ffffff30;border-radius:6px;background:#ffffff08}
+.field label.check input[type=checkbox]{width:20px;height:20px;min-width:20px;padding:0;margin:0;border:0;background:none;accent-color:var(--led);flex-shrink:0;cursor:pointer}
 
 /* ── Jellyfin ─────────────── */
 .explain{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
@@ -578,7 +578,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
             <input id="f-usuarios" name="usuarios" type="number" min="1" max="50" value="1" inputmode="numeric" aria-label="Número de usuarios o jugadores">
           </div>
           <div class="field full">
-            <label class="check" for="f-copia"><input type="checkbox" id="f-copia" name="copia" value="Sí, con copia en el 2.º NAS (+2 €/mes)"> Añadir copia en el 2.º NAS (+2 €/mes, solo almacenamiento)</label>
+            <label class="check" for="f-copia"><input type="checkbox" id="f-copia" name="copia" value="Sí, con copia en el 2.º NAS (+2 €/mes)"> <span>Añadir copia en el 2.º NAS (<span style="white-space:nowrap">+2 €/mes</span>, solo almacenamiento)</span></label>
           </div>
           <div class="field full">
             <label for="f-mensaje">Mensaje <span class="req" aria-hidden="true">*</span></label>
