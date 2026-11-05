@@ -157,6 +157,9 @@ nav[aria-expanded="true"]{display:flex}
 @keyframes blink{50%{opacity:.25}}
 @media(prefers-reduced-motion:reduce){.bay.act::after{animation:none}}
 .rack-note{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.bay .sz{position:absolute;left:0;right:0;top:33px;line-height:1;text-align:center;font-family:var(--mono);font-size:.62rem;color:#ffffffa8;letter-spacing:.02em}
+.nas-free{display:flex;align-items:center;gap:8px;margin-top:10px;padding:6px 10px;border:1px dashed #ffffff40;border-radius:6px;font-family:var(--mono);font-size:.74rem;color:#e6ece9;font-variant-numeric:tabular-nums}
+.nas-free b{color:var(--led-ok);font-weight:600}
 
 /* ── Secciones ──────────────── */
 section{padding-block:64px;border-top:1px solid var(--line)}
@@ -349,17 +352,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
           <div class="bays b4" aria-hidden="true">
             <div class="bay act"></div><div class="bay"></div><div class="bay act"></div><div class="bay"></div>
           </div>
+          <p class="nas-free">◌ <b>10 TB</b> libres para alquilar</p>
         </div>
         <div class="nas">
-          <div class="nas-head"><span>NAS-02 · ASUSTOR AS6806T</span><span>6 BAHÍAS</span></div>
+          <div class="nas-head"><span>NAS-02 · ASUSTOR AS6806T</span><span>6 × 24 TB</span></div>
           <div class="bays b6" aria-hidden="true">
-            <div class="bay"></div><div class="bay act"></div><div class="bay"></div>
-            <div class="bay act"></div>
-            <div class="bay free"><span>1 TB<br>libre</span></div>
-            <div class="bay free"><span>1 TB<br>libre</span></div>
+            <div class="bay"><span class="sz">24 TB</span></div><div class="bay act"><span class="sz">24 TB</span></div><div class="bay"><span class="sz">24 TB</span></div>
+            <div class="bay act"><span class="sz">24 TB</span></div><div class="bay"><span class="sz">24 TB</span></div><div class="bay act"><span class="sz">24 TB</span></div>
           </div>
+          <p class="nas-free">◌ <b>80 TB</b> libres para alquilar · RAID 5</p>
         </div>
-        <p class="rack-note" aria-hidden="true">● actividad &nbsp;● en línea &nbsp;◌ capacidad disponible para alquilar</p>
+        <p class="rack-note" aria-hidden="true">● actividad &nbsp;● en línea &nbsp;◌ espacio libre para alquilar</p>
       </div>
     </div>
   </div>
@@ -375,15 +378,15 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
       <div class="capacity" id="capacidad" aria-live="polite" aria-label="Capacidad de almacenamiento disponible">
         <div>
           <p class="eyebrow">Espacio disponible para alquilar</p>
-          <div class="cap-num"><span id="cap-free">80</span> TB<small> de <span id="cap-total">80</span> TB</small></div>
+          <div class="cap-num"><span id="cap-free">90</span> TB<small> de <span id="cap-total">90</span> TB</small></div>
         </div>
         <div>
-          <div class="cap-bar" role="img" id="cap-bar-label" aria-label="0 TB alquilados de 80 TB">
+          <div class="cap-bar" role="img" id="cap-bar-label" aria-label="0 TB alquilados de 90 TB">
             <span id="cap-used-bar" style="width:0%"></span>
           </div>
           <div class="cap-legend">
             <span><i class="k-used" aria-hidden="true"></i>Alquilado: <b id="cap-used">0</b> TB</span>
-            <span><i class="k-free" aria-hidden="true"></i>Libre: <b id="cap-free2">80</b> TB</span>
+            <span><i class="k-free" aria-hidden="true"></i>Libre: <b id="cap-free2">90</b> TB</span>
             <span id="cap-date"></span>
           </div>
         </div>
@@ -468,8 +471,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
         <table class="specs">
           <thead><tr><th scope="col">Equipo</th><th scope="col">Función</th><th scope="col">Detalles</th></tr></thead>
           <tbody>
-            <tr><td>NAS-01 · AS5404T</td><td>Servicios</td><td>4 bahías. Jellyfin, contenedores Docker y máquinas virtuales de laboratorio.</td></tr>
-            <tr><td>NAS-02 · AS6806T</td><td>Almacenamiento y copias</td><td>6 bahías. Espacio de clientes y copias de seguridad cruzadas con NAS-01.</td></tr>
+            <tr><td>NAS-01 · AS5404T</td><td>Servicios</td><td>4 bahías. Jellyfin, contenedores Docker y máquinas virtuales de laboratorio. 10 TB para alquilar.</td></tr>
+            <tr><td>NAS-02 · AS6806T</td><td>Almacenamiento y copias</td><td>6 discos de 24 TB en RAID 5. Espacio de clientes (80 TB para alquilar) y copias de seguridad cruzadas con NAS-01.</td></tr>
             <tr><td>Acceso remoto</td><td>Seguridad</td><td>Conexión cifrada (VPN/túnel). No se abren puertos del router a internet.</td></tr>
             <tr><td>Protección de datos</td><td>Fiabilidad</td><td>Volumen en RAID 5 (aguanta el fallo de un disco) y copias periódicas entre los dos NAS.</td></tr>
             <tr><td>SAI</td><td>Energía</td><td>Alimentación ininterrumpida: aguanta cortes breves y apaga los NAS de forma segura si el corte se alarga.</td></tr>
@@ -690,7 +693,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 (function(){
   function fmt(n){return (Math.round(n*100)/100).toLocaleString('es-ES');}
   function pintar(d){
-    var total=Number(d.total_tb)||80, usado=Math.min(Math.max(Number(d.alquilado_tb)||0,0),total), libre=total-usado;
+    var total=Number(d.total_tb)||90, usado=Math.min(Math.max(Number(d.alquilado_tb)||0,0),total), libre=total-usado;
     document.getElementById('cap-total').textContent=fmt(total);
     document.getElementById('cap-free').textContent=fmt(libre);
     document.getElementById('cap-free2').textContent=fmt(libre);
