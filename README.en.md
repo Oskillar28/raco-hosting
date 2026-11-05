@@ -108,7 +108,7 @@ flowchart LR
 flowchart TB
     Client([👤 Customer]) -->|Encrypted connection VPN / tunnel| LAN
     subgraph LAN[🏠 Local network]
-        NAS1[🖥️ NAS-01 · ASUSTOR AS5404T<br/>4 bays · 10 TB for rent<br/>Jellyfin · Docker · VMs]
+        NAS1[🖥️ NAS-01 · ASUSTOR AS5404T<br/>4 × 18 TB · 10 TB for rent<br/>Jellyfin · Docker · VMs]
         NAS2[🗄️ NAS-02 · ASUSTOR AS6806T<br/>6 × 24 TB · RAID 5 · 80 TB for rent<br/>Storage · Backups]
         NAS1 <-->|Cross-backups| NAS2
     end
@@ -116,7 +116,7 @@ flowchart TB
 
 | Device | Role | Details |
 |---|---|---|
-| **NAS-01** · ASUSTOR AS5404T | Services | 4 bays. Jellyfin, Docker containers, virtual machines. **10 TB for rent** |
+| **NAS-01** · ASUSTOR AS5404T | Services | 4 × 18 TB disks. Jellyfin, Docker containers, virtual machines. **10 TB for rent** |
 | **NAS-02** · ASUSTOR AS6806T | Storage | 6 × 24 TB disks in RAID 5. Customer storage and backups. **80 TB for rent** |
 | **Remote access** | Security | Encrypted connection (VPN/tunnel), no router ports opened |
 | **Protection** | Reliability | RAID 5 volume (survives a single disk failure) + regular backups between both NAS servers |
