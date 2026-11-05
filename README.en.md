@@ -174,7 +174,7 @@ The website counter and the badges in this README read the file [`docs/capacidad
 2. Choose `alquilar` (rent) or `liberar` (release) and enter the number of TB (for example `1`).
 3. Click **Run workflow**. The website and README update within a few minutes.
 
-The workflow won't let you rent more than is free or release more than is rented.
+The workflow won't let you rent more than is available or release more than is rented.
 
 </details>
 
