@@ -30,7 +30,7 @@ A project by **Óscar**, a second-year **SMX** student (Spain's vocational diplo
 |---|---|---:|
 | 🎬 **Jellyfin** | Your own private media server ("Netflix with your own content") | **€5/month** |
 | ⛏️ **Minecraft** | Dedicated 24/7 server for your group | **€10/month** |
-| 💾 **1 TB storage** | Private space for backups, photos and documents | **€5–7/month** |
+| 💾 **1–16 TB storage** | Private space for backups, photos and documents | **from €2.99/month** |
 
 > Monthly billing, **no long-term contract**. You deal directly with the person who runs the servers.
 
@@ -79,7 +79,7 @@ flowchart LR
 - ✅ Plugins or mods on request
 - ℹ️ Designed for small groups (up to ~10 players)
 
-### 💾 Storage — from €5/month
+### 💾 Storage — from €2.99/month
 
 **Capacity available to rent (updated live):**
 
@@ -87,10 +87,15 @@ flowchart LR
 ![Rented](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FOskillar28%2Fraco-hosting%2Fmain%2Fdocs%2Fcapacidad.json&query=%24.alquilado_tb&suffix=%20TB&label=rented&color=e08a00&style=for-the-badge&cacheSeconds=300)
 ![Total](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FOskillar28%2Fraco-hosting%2Fmain%2Fdocs%2Fcapacidad.json&query=%24.total_tb&suffix=%20TB&label=total%20for%20rent&color=0f6b5c&style=for-the-badge&cacheSeconds=300)
 
-| Plan | Capacity | Protection | Price |
-|---|---:|---|---:|
-| **Basic** | 1 TB | RAID 5 (survives a single disk failure) | **€5/month** |
-| **Plus** | 1 TB | RAID 5 + copy on the second NAS | **€7/month** |
+| Space | Price | With copy on the 2nd NAS | € per TB |
+|---:|---:|---:|---:|
+| **1 TB** | **€2.99/month** | €4.99/month | €2.99 |
+| **2 TB** | **€4.99/month** | €6.99/month | €2.50 |
+| **8 TB** | **€14.99/month** | €16.99/month | €1.87 |
+| **16 TB** ⭐ | **€24.99/month** | €26.99/month | €1.56 |
+
+- All plans on **RAID 5** (survives a single disk failure).
+- **Copy on the second NAS:** +€2/month for any size.
 
 - Private folder with your own username and password
 - Access via web, app or network drive

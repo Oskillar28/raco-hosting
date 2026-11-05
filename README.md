@@ -30,7 +30,7 @@ Proyecto de **Óscar**, alumno de **2º de SMX** (Sistemas Microinformáticos y 
 |---|---|---:|
 | 🎬 **Jellyfin** | Tu propio servidor multimedia privado ("Netflix con tu contenido") | **5 €/mes** |
 | ⛏️ **Minecraft** | Servidor dedicado 24/7 para tu grupo | **10 €/mes** |
-| 💾 **Almacenamiento 1 TB** | Espacio privado para copias, fotos y documentos | **5 – 7 €/mes** |
+| 💾 **Almacenamiento 1–16 TB** | Espacio privado para copias, fotos y documentos | **desde 2,99 €/mes** |
 
 > Pago mensual, **sin permanencia**. Trato directo con quien administra los servidores.
 
@@ -79,7 +79,7 @@ flowchart LR
 - ✅ Plugins o mods bajo petición
 - ℹ️ Pensado para grupos pequeños (hasta ~10 jugadores)
 
-### 💾 Almacenamiento — desde 5 €/mes
+### 💾 Almacenamiento — desde 2,99 €/mes
 
 **Capacidad para alquilar (se actualiza en tiempo real):**
 
@@ -87,10 +87,15 @@ flowchart LR
 ![Alquilado](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FOskillar28%2Fraco-hosting%2Fmain%2Fdocs%2Fcapacidad.json&query=%24.alquilado_tb&suffix=%20TB&label=alquilado&color=e08a00&style=for-the-badge&cacheSeconds=300)
 ![Total](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FOskillar28%2Fraco-hosting%2Fmain%2Fdocs%2Fcapacidad.json&query=%24.total_tb&suffix=%20TB&label=total%20para%20alquilar&color=0f6b5c&style=for-the-badge&cacheSeconds=300)
 
-| Plan | Capacidad | Protección | Precio |
-|---|---:|---|---:|
-| **Básico** | 1 TB | RAID 5 (tolera el fallo de un disco) | **5 €/mes** |
-| **Plus** | 1 TB | RAID 5 + copia en el segundo NAS | **7 €/mes** |
+| Espacio | Precio | Con copia en el 2.º NAS | € por TB |
+|---:|---:|---:|---:|
+| **1 TB** | **2,99 €/mes** | 4,99 €/mes | 2,99 € |
+| **2 TB** | **4,99 €/mes** | 6,99 €/mes | 2,50 € |
+| **8 TB** | **14,99 €/mes** | 16,99 €/mes | 1,87 € |
+| **16 TB** ⭐ | **24,99 €/mes** | 26,99 €/mes | 1,56 € |
+
+- Todos los planes en **RAID 5** (aguanta el fallo de un disco).
+- **Copia en el segundo NAS:** +2 €/mes en cualquier tamaño.
 
 - Carpeta privada con usuario y contraseña propios
 - Acceso por web, app o unidad de red

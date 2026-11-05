@@ -23,7 +23,7 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Racó Hosting — Nube privada en Terrassa">
-<meta name="twitter:description" content="Jellyfin, Minecraft y almacenamiento privado en hardware real. Sin permanencia, desde 5 €/mes.">
+<meta name="twitter:description" content="Jellyfin, Minecraft y almacenamiento privado en hardware real. Sin permanencia, desde 2,99 €/mes.">
 <meta name="twitter:image" content="https://oskillar28.github.io/raco-hosting/captura-web.jpg">
 <!-- Schema.org LocalBusiness -->
 <script type="application/ld+json">
@@ -36,7 +36,7 @@
   "addressLocality":"Terrassa",
   "addressRegion":"Cataluña",
   "addressCountry":"ES",
-  "priceRange":"5€–10€/mes",
+  "priceRange":"2,99€–26,99€/mes",
   "contactType":"customer service"
 }
 </script>
@@ -196,6 +196,15 @@ section{padding-block:64px;border-top:1px solid var(--line)}
 .tiers{display:grid;gap:8px;font-variant-numeric:tabular-nums}
 .tier{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--line);padding-bottom:6px;font-size:.95rem}
 .tier b{font-family:var(--mono)}
+/* Tabla de tamaños de almacenamiento */
+.sizes{display:grid;grid-template-columns:1fr auto auto;gap:0 14px;font-variant-numeric:tabular-nums;font-size:.95rem;align-items:baseline}
+.sizes > *{padding:6px 0;border-bottom:1px dashed var(--line)}
+.sizes .h{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line)}
+.sizes b,.sizes .p{font-family:var(--mono);text-align:right;white-space:nowrap}
+.sizes .p{color:var(--muted)}
+.sizes .best{color:var(--accent);font-family:var(--mono);font-size:.7rem;margin-left:6px}
+.check{display:flex;align-items:center;gap:10px;font-size:.95rem;color:#cfd8d3;cursor:pointer}
+.check input{width:18px;height:18px;accent-color:var(--led);flex-shrink:0}
 
 /* ── Jellyfin ─────────────── */
 .explain{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
@@ -409,19 +418,23 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
         </article>
 
         <article class="plan" role="listitem">
-          <div class="tag"><span>Almacenamiento</span><b>Desde 1 TB</b></div>
-          <div class="price">5 €<small> /mes</small></div>
+          <div class="tag"><span>Almacenamiento</span><b>De 1 a 16 TB</b></div>
+          <div class="price"><small>desde </small>2,99 €<small> /mes</small></div>
           <p class="what">Espacio privado en mis NAS para guardar copias de seguridad, fotos o documentos.</p>
-          <div class="tiers">
-            <div class="tier"><span>Básico · 1 TB</span><b>5 €/mes</b></div>
-            <div class="tier"><span>Plus · 1 TB + copia 2.º NAS</span><b>7 €/mes</b></div>
+          <div class="sizes" role="table" aria-label="Precios de almacenamiento por tamaño">
+            <span class="h" role="columnheader">Espacio</span><span class="h" role="columnheader">Precio</span><span class="h" role="columnheader">Con copia*</span>
+            <span role="cell">1 TB</span><b role="cell">2,99 €</b><span class="p" role="cell">4,99 €</span>
+            <span role="cell">2 TB</span><b role="cell">4,99 €</b><span class="p" role="cell">6,99 €</span>
+            <span role="cell">8 TB</span><b role="cell">14,99 €</b><span class="p" role="cell">16,99 €</span>
+            <span role="cell">16 TB<span class="best">MEJOR €/TB</span></span><b role="cell">24,99 €</b><span class="p" role="cell">26,99 €</span>
           </div>
+          <p class="what" style="font-size:.85rem">Precios al mes. *Copia en el 2.º NAS: <span style="white-space:nowrap">+2 €/mes</span> en cualquier tamaño.</p>
           <ul>
             <li>Carpeta privada con usuario y contraseña propios</li>
             <li>Acceso por web, app o unidad de red</li>
             <li>Discos en RAID y servidores protegidos con SAI</li>
           </ul>
-          <a class="btn ghost" href="#contacto" aria-label="Contratar espacio de almacenamiento desde 5 euros al mes">Contratar espacio</a>
+          <a class="btn ghost" href="#contacto" aria-label="Contratar espacio de almacenamiento desde 2,99 euros al mes">Contratar espacio</a>
         </article>
       </div>
     </div>
@@ -550,14 +563,19 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
             <select id="f-servicio" name="servicio">
               <option>Jellyfin · 5 €/mes</option>
               <option>Minecraft · 10 €/mes</option>
-              <option>Almacenamiento básico 1 TB · 5 €/mes</option>
-              <option>Almacenamiento plus 1 TB · 7 €/mes</option>
+              <option>Almacenamiento 1 TB · 2,99 €/mes</option>
+              <option>Almacenamiento 2 TB · 4,99 €/mes</option>
+              <option>Almacenamiento 8 TB · 14,99 €/mes</option>
+              <option>Almacenamiento 16 TB · 24,99 €/mes</option>
               <option>Otra consulta</option>
             </select>
           </div>
           <div class="field">
             <label for="f-usuarios">Usuarios o jugadores</label>
             <input id="f-usuarios" name="usuarios" type="number" min="1" max="50" value="1" inputmode="numeric" aria-label="Número de usuarios o jugadores">
+          </div>
+          <div class="field full">
+            <label class="check" for="f-copia"><input type="checkbox" id="f-copia" name="copia" value="Sí, con copia en el 2.º NAS (+2 €/mes)"> Añadir copia en el 2.º NAS (+2 €/mes, solo almacenamiento)</label>
           </div>
           <div class="field full">
             <label for="f-mensaje">Mensaje <span class="req" aria-hidden="true">*</span></label>
