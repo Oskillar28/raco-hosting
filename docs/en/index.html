@@ -307,6 +307,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 .lang a{color:var(--muted)}
 .lang a:hover{color:var(--ink)}
 .lang [aria-current]{background:var(--accent);color:var(--accent-ink);font-weight:600}
+
+/* ===== Toques naranjas ===== */
+:root{--orange:#b45309;--orange-bg:#e08a00;--orange-ink:#1b1205}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--orange:#ffa726;--orange-bg:#ffa726;--orange-ink:#1b1205}}
+:root[data-theme="dark"]{--orange:#ffa726;--orange-bg:#ffa726;--orange-ink:#1b1205}
+.hero .eyebrow,.sec-head .eyebrow{color:var(--orange)}
+.hero h1 em{text-decoration:underline;text-decoration-color:var(--orange-bg);text-decoration-thickness:.09em;text-underline-offset:.14em}
+.step .n{color:var(--orange)}
+.sizes .best{background:var(--orange-bg);color:var(--orange-ink);padding:1px 6px;border-radius:999px;font-weight:600;white-space:nowrap;display:inline-block}
+.badge-pop{background:var(--orange-bg);color:var(--orange-ink)}
 </style>
 </head>
 <body>
