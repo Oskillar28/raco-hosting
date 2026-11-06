@@ -29,7 +29,7 @@ A project by **Óscar**, a second-year **SMX** student (Spain's vocational diplo
 | Service | What it's for | Price |
 |---|---|---:|
 | 🎬 **Jellyfin** | Your own private media server ("Netflix with your own content") | **€5/month** |
-| ⛏️ **Minecraft** | Dedicated 24/7 server for your group | **€10/month** |
+| ⛏️ **Minecraft** | 24/7 server for your group, **16 GB of RAM and mods** | **€10/month** |
 | 💾 **1–16 TB storage** | Private space for backups, photos and documents | **from €2.99/month** |
 
 > Monthly billing, **no long-term contract**. You deal directly with the person who runs the servers.
@@ -73,11 +73,14 @@ flowchart LR
 
 ### ⛏️ Minecraft server — €10/month
 
-- ✅ Dedicated **Java Edition** server for your group, online 24/7
-- ✅ **Whitelist**: only authorised players can join
-- ✅ **Daily backup** of the world
-- ✅ Plugins or mods on request
-- ℹ️ Designed for small groups (up to ~10 players)
+- ✅ **16 GB of RAM** for your server, online 24/7
+- ✅ **Mods and modpacks included**: I install them for you
+- ✅ **Daily backup** of your world
+- ✅ **Personal service**: you deal directly with the person who runs the server
+- ✅ **Java Edition** with a whitelist: only authorised players can join
+- ℹ️ Designed for groups of up to ~10 players
+
+> 💡 **16 GB for €10** works out at **€0.63 per GB**: most hosts charge €1–3 per GB.
 
 ### 💾 Storage — from €2.99/month
 

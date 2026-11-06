@@ -29,7 +29,7 @@ Proyecto de **Óscar**, alumno de **2º de SMX** (Sistemas Microinformáticos y 
 | Servicio | Para qué sirve | Precio |
 |---|---|---:|
 | 🎬 **Jellyfin** | Tu propio servidor multimedia privado ("Netflix con tu contenido") | **5 €/mes** |
-| ⛏️ **Minecraft** | Servidor dedicado 24/7 para tu grupo | **10 €/mes** |
+| ⛏️ **Minecraft** | Servidor 24/7 para tu grupo, **16 GB de RAM y mods** | **10 €/mes** |
 | 💾 **Almacenamiento 1–16 TB** | Espacio privado para copias, fotos y documentos | **desde 2,99 €/mes** |
 
 > Pago mensual, **sin permanencia**. Trato directo con quien administra los servidores.
@@ -73,11 +73,14 @@ flowchart LR
 
 ### ⛏️ Servidor de Minecraft — 10 €/mes
 
-- ✅ Servidor **Java Edition** dedicado a tu grupo, encendido 24/7
-- ✅ **Lista blanca**: solo entran los jugadores autorizados
+- ✅ **16 GB de RAM** para tu servidor, encendido 24/7
+- ✅ **Mods y modpacks incluidos**: te los instalo yo
 - ✅ **Copia de seguridad diaria** del mundo
-- ✅ Plugins o mods bajo petición
-- ℹ️ Pensado para grupos pequeños (hasta ~10 jugadores)
+- ✅ **Trato directo en castellano**: hablas con quien administra el servidor
+- ✅ **Java Edition** con lista blanca: solo entran los jugadores autorizados
+- ℹ️ Pensado para grupos de hasta ~10 jugadores
+
+> 💡 **16 GB por 10 €** son **0,63 € por GB**: la mayoría de servicios cobra entre 1 y 3 € por GB.
 
 ### 💾 Almacenamiento — desde 2,99 €/mes
 
