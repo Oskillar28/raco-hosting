@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Racó Hosting — Private cloud in Terrassa</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Racó Hosting: Jellyfin streaming, Minecraft servers and private cloud storage. Hosted on real hardware in Terrassa (Barcelona, Spain). No long-term contract.">
+<meta name="description" content="Racó Hosting: a second-year SMX demo project with Jellyfin, Minecraft servers and storage on two real NAS servers in Terrassa (Barcelona, Spain).">
 <meta name="keywords" content="jellyfin, minecraft server, private storage, private cloud, terrassa, nas, personal hosting">
 <meta name="author" content="Óscar Ramírez">
 <meta name="robots" content="index, follow">
@@ -17,14 +17,14 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://oskillar28.github.io/raco-hosting/en/">
 <meta property="og:title" content="Racó Hosting — Private cloud in Terrassa">
-<meta property="og:description" content="Jellyfin, Minecraft and private storage on real hardware. No long-term contract, personal service.">
+<meta property="og:description" content="Second-year SMX demo project: Jellyfin, Minecraft and private storage on real hardware.">
 <meta property="og:image" content="https://oskillar28.github.io/raco-hosting/captura-web.jpg">
 <meta property="og:locale" content="en_GB">
 <meta property="og:locale:alternate" content="es_ES">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Racó Hosting — Private cloud in Terrassa">
-<meta name="twitter:description" content="Jellyfin, Minecraft and private storage on real hardware. No long-term contract, from €2.99/month.">
+<meta name="twitter:description" content="Second-year SMX demo project: Jellyfin, Minecraft and private storage on real hardware.">
 <meta name="twitter:image" content="https://oskillar28.github.io/raco-hosting/captura-web.jpg">
 <!-- Schema.org LocalBusiness -->
 <script type="application/ld+json">
@@ -37,7 +37,6 @@
   "addressLocality":"Terrassa",
   "addressRegion":"Catalonia",
   "addressCountry":"ES",
-  "priceRange":"€2.99–€26.99/month",
   "contactType":"customer service"
 }
 </script>
@@ -317,12 +316,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 .step .n{color:var(--orange)}
 .sizes .best{background:var(--orange-bg);color:var(--orange-ink);padding:1px 6px;border-radius:999px;font-weight:600;white-space:nowrap;display:inline-block}
 .badge-pop{background:var(--orange-bg);color:var(--orange-ink)}
+
+/* ===== Aviso de proyecto de demostración ===== */
+.demo-banner{background:color-mix(in srgb,var(--orange-bg) 18%,var(--bg));border-bottom:1px solid color-mix(in srgb,var(--orange-bg) 45%,transparent);color:var(--ink);font-size:.92rem;line-height:1.45}
+.demo-banner .wrap{display:flex;gap:10px;align-items:flex-start;padding-block:10px}
+.demo-banner b{color:var(--orange)}
 </style>
 </head>
 <body>
 
 <a class="skip-link" href="#main">Skip to content</a>
 
+<div class="demo-banner" role="note"><div class="wrap"><span aria-hidden="true">🧪</span><p><b>Demo project · non-commercial.</b> Racó Hosting is a second-year SMX student project: no services can be ordered or are charged for at the moment, and prices are indicative only.</p></div></div>
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#inicio" aria-label="Racó Hosting — home"><i aria-hidden="true"></i>Racó Hosting</a>
@@ -351,7 +356,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
       <div>
         <p class="eyebrow">Private cloud · Terrassa (Barcelona, Spain)</p>
         <h1>Your streaming, your server and your files, on <em>real hardware</em>.</h1>
-        <p class="lead">I'm Óscar, a second-year IT student (SMX, Spain's vocational diploma in computer systems and networks). I run two NAS servers at home and rent out part of their capacity: Jellyfin media servers, Minecraft servers for your group and private storage space. Personal service, fixed prices and no long-term contract.</p>
+        <p class="lead">I'm Óscar, a second-year IT student (SMX, Spain's vocational diploma in computer systems and networks). I run two NAS servers at home and, in this demo project, show how part of their capacity could be offered: Jellyfin media servers, Minecraft servers for your group and private storage space.</p>
         <div class="cta">
           <a class="btn primary" href="#servicios">See pricing</a>
           <a class="btn ghost" href="#contacto">Get in touch</a>
@@ -383,7 +388,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
       <div class="sec-head">
         <p class="eyebrow">Services and pricing</p>
         <h2>Three services, one fixed monthly price</h2>
-        <p>Pay month by month and cancel whenever you like. All prices are final.</p>
+        <p>Indicative prices for this demo project. No services can be ordered or are charged for at the moment.</p>
       </div>
 
       <div class="capacity" id="capacidad" aria-live="polite" aria-label="Available storage capacity">
@@ -414,7 +419,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
             <li>Remote access over an encrypted connection</li>
             <li>No ads and no third-party subscriptions</li>
           </ul>
-          <a class="btn ghost" href="#contacto" aria-label="Order Jellyfin for 5 euros a month">Order Jellyfin</a>
+          <a class="btn ghost" href="#contacto" aria-label="I'm interested in Jellyfin: join the interest list">I'm interested</a>
         </article>
 
         <article class="plan feat" role="listitem">
@@ -429,7 +434,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
             <li>Java Edition with a whitelist: only the players you choose can join</li>
             <li>Designed for groups of up to ~10 players</li>
           </ul>
-          <a class="btn primary" href="#contacto" aria-label="Order a Minecraft server with 16 GB of RAM for 10 euros a month">Order Minecraft</a>
+          <a class="btn primary" href="#contacto" aria-label="I'm interested in Minecraft: join the interest list">I'm interested</a>
         </article>
 
         <article class="plan" role="listitem">
@@ -449,7 +454,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
             <li>Access via web, app or network drive</li>
             <li>RAID-protected disks and servers on a UPS</li>
           </ul>
-          <a class="btn ghost" href="#contacto" aria-label="Order storage from 2.99 euros a month">Order storage</a>
+          <a class="btn ghost" href="#contacto" aria-label="I'm interested in storage: join the interest list">I'm interested</a>
         </article>
       </div>
     </div>
@@ -543,7 +548,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
         </details>
         <details>
           <summary>How do I pay?</summary>
-          <p>By Bizum or bank transfer, at the start of each month. I'll send you a summary of what your service includes.</p>
+          <p>Nothing is charged right now: this is a demo project. If the service ever launches, I'll email you with all the terms.</p>
         </details>
         <details>
           <summary>How many players can the Minecraft server handle?</summary>
@@ -559,7 +564,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
         <div>
           <p class="eyebrow" style="color:#9fb0a8">Contact</p>
           <h2>Interested in a service?</h2>
-          <p>Fill in the form telling me which service you want and how many users or players you'll be. I'll reply by email within 24 hours.</p>
+          <p>Join the interest list by telling me which service you'd like and how many users or players you'd be. Nothing is charged: I'll email you if the service launches.</p>
           <p style="margin-top:14px;font-size:.9rem;color:#9fb0a8">You can also email me directly at <strong style="color:#cfd8d3">oscardavidsmx@gmail.com</strong></p>
         </div>
         <form class="form" id="contact-form" novalidate aria-label="Contact form">
@@ -600,7 +605,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
           <div class="hp" aria-hidden="true"><label for="f-web">Leave empty</label><input id="f-web" name="_gotcha" tabindex="-1" autocomplete="off"></div>
           <div class="send">
             <input type="hidden" name="idioma" value="English">
-            <button type="submit" id="f-enviar">Send message</button>
+            <button type="submit" id="f-enviar">Join the list</button>
             <span class="status" id="f-status" role="status" aria-live="polite"></span>
           </div>
           <p class="privacy">I only use your details to reply to your enquiry. I never share any data with third parties.</p>
@@ -772,7 +777,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
       .then(function(r){
         if(!r.ok) throw new Error(r.status);
         f.reset();
-        setStatus('✓ Message sent. I\'ll reply within 24 hours.','ok');
+        setStatus('✓ You\'re on the list. I\'ll email you if the service launches.','ok');
         btn.disabled=false;
       })
       .catch(function(){

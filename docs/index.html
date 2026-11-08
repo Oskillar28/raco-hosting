@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Racó Hosting — Nube privada en Terrassa</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Racó Hosting: Jellyfin streaming, servidores de Minecraft y almacenamiento en la nube privada. Alojado en hardware real en Terrassa (Barcelona). Sin permanencia.">
+<meta name="description" content="Racó Hosting: proyecto de demostración de 2º SMX con Jellyfin, servidores de Minecraft y almacenamiento en dos NAS reales en Terrassa (Barcelona).">
 <meta name="keywords" content="jellyfin, minecraft servidor, almacenamiento privado, nube privada, terrassa, nas, hosting personal">
 <meta name="author" content="Óscar Ramírez">
 <meta name="robots" content="index, follow">
@@ -17,13 +17,13 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://oskillar28.github.io/raco-hosting/">
 <meta property="og:title" content="Racó Hosting — Nube privada en Terrassa">
-<meta property="og:description" content="Jellyfin, Minecraft y almacenamiento privado en hardware de verdad. Sin permanencia, trato directo.">
+<meta property="og:description" content="Proyecto de demostración de 2º SMX: Jellyfin, Minecraft y almacenamiento privado en hardware de verdad.">
 <meta property="og:image" content="https://oskillar28.github.io/raco-hosting/captura-web.jpg">
 <meta property="og:locale" content="es_ES">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Racó Hosting — Nube privada en Terrassa">
-<meta name="twitter:description" content="Jellyfin, Minecraft y almacenamiento privado en hardware real. Sin permanencia, desde 2,99 €/mes.">
+<meta name="twitter:description" content="Proyecto de demostración de 2º SMX: Jellyfin, Minecraft y almacenamiento privado en hardware real.">
 <meta name="twitter:image" content="https://oskillar28.github.io/raco-hosting/captura-web.jpg">
 <!-- Schema.org LocalBusiness -->
 <script type="application/ld+json">
@@ -36,7 +36,6 @@
   "addressLocality":"Terrassa",
   "addressRegion":"Cataluña",
   "addressCountry":"ES",
-  "priceRange":"2,99€–26,99€/mes",
   "contactType":"customer service"
 }
 </script>
@@ -316,12 +315,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 .step .n{color:var(--orange)}
 .sizes .best{background:var(--orange-bg);color:var(--orange-ink);padding:1px 6px;border-radius:999px;font-weight:600;white-space:nowrap;display:inline-block}
 .badge-pop{background:var(--orange-bg);color:var(--orange-ink)}
+
+/* ===== Aviso de proyecto de demostración ===== */
+.demo-banner{background:color-mix(in srgb,var(--orange-bg) 18%,var(--bg));border-bottom:1px solid color-mix(in srgb,var(--orange-bg) 45%,transparent);color:var(--ink);font-size:.92rem;line-height:1.45}
+.demo-banner .wrap{display:flex;gap:10px;align-items:flex-start;padding-block:10px}
+.demo-banner b{color:var(--orange)}
 </style>
 </head>
 <body>
 
 <a class="skip-link" href="#main">Saltar al contenido</a>
 
+<div class="demo-banner" role="note"><div class="wrap"><span aria-hidden="true">🧪</span><p><b>Proyecto de demostración · no comercial.</b> Racó Hosting es un proyecto de 2º de SMX: de momento no se contrata ni se cobra ningún servicio y los precios son orientativos.</p></div></div>
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#inicio" aria-label="Racó Hosting — inicio"><i aria-hidden="true"></i>Racó Hosting</a>
@@ -350,7 +355,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
       <div>
         <p class="eyebrow">Nube privada · Terrassa (Barcelona)</p>
         <h1>Tu streaming, tu servidor y tus archivos, en <em>hardware de verdad</em>.</h1>
-        <p class="lead">Soy Óscar, alumno de 2º de SMX. Gestiono dos NAS en casa y alquilo parte de su capacidad: servidores multimedia con Jellyfin, servidores de Minecraft para tu grupo y espacio de almacenamiento privado. Trato directo, precios cerrados y sin permanencia.</p>
+        <p class="lead">Soy Óscar, alumno de 2º de SMX. Gestiono dos NAS en casa y, en este proyecto de demostración, muestro cómo se ofrecería parte de su capacidad: servidores multimedia con Jellyfin, servidores de Minecraft para tu grupo y espacio de almacenamiento privado.</p>
         <div class="cta">
           <a class="btn primary" href="#servicios">Ver precios</a>
           <a class="btn ghost" href="#contacto">Pedir información</a>
@@ -382,7 +387,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
       <div class="sec-head">
         <p class="eyebrow">Servicios y tarifas</p>
         <h2>Tres servicios, precio mensual fijo</h2>
-        <p>Pagas mes a mes y lo dejas cuando quieras. Todos los precios son finales.</p>
+        <p>Precios orientativos de este proyecto de demostración. De momento no se contrata ni se cobra ningún servicio.</p>
       </div>
 
       <div class="capacity" id="capacidad" aria-live="polite" aria-label="Capacidad de almacenamiento disponible">
@@ -413,7 +418,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
             <li>Acceso desde fuera de casa por conexión cifrada</li>
             <li>Sin anuncios y sin suscripción a terceros</li>
           </ul>
-          <a class="btn ghost" href="#contacto" aria-label="Contratar Jellyfin por 5 euros al mes">Contratar Jellyfin</a>
+          <a class="btn ghost" href="#contacto" aria-label="Me interesa Jellyfin: apuntarme a la lista de interesados">Me interesa</a>
         </article>
 
         <article class="plan feat" role="listitem">
@@ -428,7 +433,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
             <li>Java Edition con lista blanca: solo entran los jugadores que tú digas</li>
             <li>Pensado para grupos de hasta ~10 jugadores</li>
           </ul>
-          <a class="btn primary" href="#contacto" aria-label="Contratar servidor Minecraft con 16 GB de RAM por 10 euros al mes">Contratar Minecraft</a>
+          <a class="btn primary" href="#contacto" aria-label="Me interesa Minecraft: apuntarme a la lista de interesados">Me interesa</a>
         </article>
 
         <article class="plan" role="listitem">
@@ -448,7 +453,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
             <li>Acceso por web, app o unidad de red</li>
             <li>Discos en RAID y servidores protegidos con SAI</li>
           </ul>
-          <a class="btn ghost" href="#contacto" aria-label="Contratar espacio de almacenamiento desde 2,99 euros al mes">Contratar espacio</a>
+          <a class="btn ghost" href="#contacto" aria-label="Me interesa el almacenamiento: apuntarme a la lista de interesados">Me interesa</a>
         </article>
       </div>
     </div>
@@ -542,7 +547,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
         </details>
         <details>
           <summary>¿Cómo se paga?</summary>
-          <p>Por Bizum o transferencia bancaria, a principio de cada mes. Te mando un resumen de lo que incluye tu servicio.</p>
+          <p>Ahora mismo no se paga nada: es un proyecto de demostración. Si en el futuro el servicio se pone en marcha, te avisaré por correo con todas las condiciones.</p>
         </details>
         <details>
           <summary>¿Para cuántos jugadores es el servidor de Minecraft?</summary>
@@ -558,7 +563,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
         <div>
           <p class="eyebrow" style="color:#9fb0a8">Contacto</p>
           <h2>¿Te interesa algún servicio?</h2>
-          <p>Rellena el formulario indicando qué servicio quieres y cuántos usuarios o jugadores seréis. Te respondo por correo en menos de 24 horas.</p>
+          <p>Apúntate a la lista de interesados indicando qué servicio te interesaría y cuántos usuarios o jugadores seríais. No se cobra nada: te aviso por correo si el servicio se pone en marcha.</p>
           <p style="margin-top:14px;font-size:.9rem;color:#9fb0a8">También puedes escribirme directamente a <strong style="color:#cfd8d3">oscardavidsmx@gmail.com</strong></p>
         </div>
         <form class="form" id="contact-form" novalidate aria-label="Formulario de contacto">
@@ -598,7 +603,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
           </div>
           <div class="hp" aria-hidden="true"><label for="f-web">No rellenar</label><input id="f-web" name="_gotcha" tabindex="-1" autocomplete="off"></div>
           <div class="send">
-            <button type="submit" id="f-enviar">Enviar mensaje</button>
+            <button type="submit" id="f-enviar">Apuntarme a la lista</button>
             <span class="status" id="f-status" role="status" aria-live="polite"></span>
           </div>
           <p class="privacy">Solo uso tus datos para responder a tu consulta. No comparto ningún dato con terceros.</p>
@@ -770,7 +775,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
       .then(function(r){
         if(!r.ok) throw new Error(r.status);
         f.reset();
-        setStatus('✓ Mensaje enviado. Te respondo en menos de 24 horas.','ok');
+        setStatus('✓ Apuntado. Te aviso por correo si el servicio se pone en marcha.','ok');
         btn.disabled=false;
       })
       .catch(function(){

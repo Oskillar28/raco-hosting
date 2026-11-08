@@ -8,7 +8,7 @@ Proyecto de **Óscar**, alumno de **2º de SMX** (Sistemas Microinformáticos y 
 
 **🇪🇸 Español** · [🇬🇧 English](README.en.md)
 
-![Estado](https://img.shields.io/badge/estado-en%20servicio-2e9e5b?style=for-the-badge)
+![Estado](https://img.shields.io/badge/estado-proyecto%20de%20demostraci%C3%B3n-e08a00?style=for-the-badge)
 ![NAS](https://img.shields.io/badge/servidores-2%20NAS%20ASUSTOR-0f6b5c?style=for-the-badge)
 ![Docker](https://img.shields.io/badge/Docker-contenedores-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Imagen Docker](https://img.shields.io/badge/ghcr.io-imagen%20web-2496ED?style=for-the-badge&logo=docker&logoColor=white)
@@ -32,7 +32,7 @@ Proyecto de **Óscar**, alumno de **2º de SMX** (Sistemas Microinformáticos y 
 | ⛏️ **Minecraft** | Servidor 24/7 para tu grupo, **16 GB de RAM y mods** | **10 €/mes** |
 | 💾 **Almacenamiento 1–16 TB** | Espacio privado para copias, fotos y documentos | **desde 2,99 €/mes** |
 
-> Pago mensual, **sin permanencia**. Trato directo con quien administra los servidores.
+> 🧪 **Proyecto de demostración, no comercial.** De momento no se contrata ni se cobra ningún servicio; los precios son orientativos.
 
 ---
 
@@ -168,7 +168,7 @@ La imagen (nginx + la web) se construye y publica automáticamente con GitHub Ac
 
 ## 📬 Contacto
 
-¿Te interesa algún servicio? Usa el **[formulario de contacto de la web](https://oskillar28.github.io/raco-hosting/#contacto)** indicando qué servicio quieres y cuántos usuarios o jugadores seréis. Respondo por correo en menos de 24 horas.
+¿Te interesa algún servicio? Apúntate a la **[lista de interesados de la web](https://oskillar28.github.io/raco-hosting/#contacto)**. No se cobra nada: te aviso por correo si el servicio se pone en marcha.
 
 ---
 

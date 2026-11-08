@@ -8,7 +8,7 @@ A project by **Óscar**, a second-year **SMX** student (Spain's vocational diplo
 
 [🇪🇸 Español](README.md) · **🇬🇧 English**
 
-![Status](https://img.shields.io/badge/status-in%20service-2e9e5b?style=for-the-badge)
+![Status](https://img.shields.io/badge/status-demo%20project-e08a00?style=for-the-badge)
 ![NAS](https://img.shields.io/badge/servers-2%20ASUSTOR%20NAS-0f6b5c?style=for-the-badge)
 ![Docker](https://img.shields.io/badge/Docker-containers-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Docker image](https://img.shields.io/badge/ghcr.io-web%20image-2496ED?style=for-the-badge&logo=docker&logoColor=white)
@@ -32,7 +32,7 @@ A project by **Óscar**, a second-year **SMX** student (Spain's vocational diplo
 | ⛏️ **Minecraft** | 24/7 server for your group, **16 GB of RAM and mods** | **€10/month** |
 | 💾 **1–16 TB storage** | Private space for backups, photos and documents | **from €2.99/month** |
 
-> Monthly billing, **no long-term contract**. You deal directly with the person who runs the servers.
+> 🧪 **Demo project, non-commercial.** No services can be ordered or are charged for at the moment; prices are indicative only.
 
 ---
 
@@ -168,7 +168,7 @@ The image (nginx + the website) is built and published automatically by GitHub A
 
 ## 📬 Contact
 
-Interested in a service? Use the **[contact form on the website](https://oskillar28.github.io/raco-hosting/en/#contact)** to tell me which service you want and how many users or players you'll be. I reply by email within 24 hours.
+Interested in a service? Join the **[interest list on the website](https://oskillar28.github.io/raco-hosting/en/#contacto)**. Nothing is charged: I'll email you if the service launches.
 
 ---
 
